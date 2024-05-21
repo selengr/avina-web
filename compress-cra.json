@@ -1,0 +1,7 @@
+{
+  "algorithms": ["gz", "br"],
+  "filetypes": [".html", ".json", ".js", ".ts", ".css", ".svg", ".png", ".jpg", ".webp", ".ico", ".eot", ".ttf", ".woff2", ".woff", ".map"],
+  "directory": "/build",
+  "retainUncompressedFiles": true,
+  "asynchronousCompression": true
+}

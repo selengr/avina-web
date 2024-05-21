@@ -1,0 +1,233 @@
+{
+  "version": "02.10.11",
+  "name": "psya-web",
+  "license": "EULA https://www.eulatemplate.com/live.php?token=YrOARe3pW73vtyJ1xTcqVAeDqWZPXbZv",
+  "private": true,
+  "description": "روان آزمون سایا",
+  "author": "Etemad Rayafaza <rayafaza.dev@gmail.com> (https://rayafaza.com)",
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.fardup.ir/fardup/psya_web"
+  },
+  "bugs": {
+    "url": "http://gitlab.fardup.ir/fardup/psya_web/-/issues",
+    "email": "psya.develop.smartis@gmail.com"
+  },
+  "config": {
+    "port": "8000"
+  },
+  "scripts": {
+    "cleaner": "rimraf ./node_modules && yarn install && yarn upgrade",
+    "postinstall": "husky install",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable",
+    "sync": "git fetch origin && git merge origin/master && yarn install",
+    "prestart": "tsc && yarn run info",
+    "start": "nodemon -w ./package.json --exec craco start",
+    "info": "node ./console.ts",
+    "prebuild": "yarn build:clean && yarn run info",
+    "build": "craco build",
+    "betabuild": "GENERATE_SOURCEMAP=true craco build",
+    "build:clean": "rimraf ./build",
+    "postbuild": "compress-cra -c ./compress-cra.json",
+    "preRelease": "yarn release --prerelease",
+    "minorRelease": "yarn release --release-as minor",
+    "alpharelease": "yarn release --release-as alpha",
+    "ver": "sh ./internals/set-version",
+    "release": "standard-version",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "test:generators": "ts-node --project=./internals/ts-node.tsconfig.json ./internals/testing/generators/test-generators.ts",
+    "start:prod": "yarn run build && serve -s build",
+    "checkTs": "tsc --noEmit",
+    "eslint": "eslint --ext tsx",
+    "lint": "eslint src",
+    "lint:fix": "yarn eslint --fix src && yarn lint --fix",
+    "lint:css": "stylelint src/**/*.{css,less,scss,sss}",
+    "lint:staged": "lint-staged",
+    "generate": "cross-env TS_NODE_PROJECT='./internals/ts-node.tsconfig.json' plop --plopfile internals/generators/plopfile.ts",
+    "prettify": "prettier --write \"src/**/*.{js,jsx,json,md,ts,tsx,css,less}\"",
+    "precommit": "yarn prettify",
+    "extract-messages": "i18next-scanner --config=internals/extractMessages/i18next-scanner.config.js",
+    "preupdate": "ncu -u --reject swiper && rimraf yarn.lock",
+    "update": "yarn preupdate && yarn",
+    "prepare": "husky install",
+    "commitlint": "commitlint --edit"
+  },
+  "cracoConfig": "./craco.config.js",
+  "nodemonConfig": {
+    "delay": 1000
+  },
+  "cpu": [
+    "x64",
+    "x32",
+    "ia32",
+    "arm",
+    "arm64",
+    "mips"
+  ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 2 safari version",
+      "last 2 edge versions"
+    ],
+    "modern": [
+      "last 1 chrome version",
+      "last 1 firefox version"
+    ],
+    "ssr": [
+      "node 18"
+    ]
+  },
+
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "yarn run eslint --fix"
+    ],
+    "*.{md,json}": [
+      "prettier --write"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*/*.d.ts",
+      "!src/**/*/Loadable.{js,jsx,ts,tsx}",
+      "!src/**/*/messages.ts",
+      "!src/**/*/types.ts",
+      "!src/index.tsx"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  },
+  "eslintConfig": {
+    "extends": "react-app",
+    "ignorePatterns": [
+      "node_modules/"
+    ]
+  },
+  "dependencies": {
+    "@date-io/date-fns": "^2.17.0",
+    "@date-io/date-fns-jalali": "2.17.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "5.15.2",
+    "@mui/material": "5.15.2",
+    "@mui/system": "5.15.2",
+    "@mui/x-date-pickers": "^5.0.20",
+    "@reduxjs/toolkit": "^1.9.5",
+    "@types/lodash": "^4.14.195",
+    "@types/qs": "6.9.7",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@types/react-redux": "^7.1.25",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/react-test-renderer": "^18.0.0",
+    "@types/styled-components": "5.1.26",
+    "ahooks": "^3.7.8",
+    "axios": "1.6.3",
+    "compression-webpack-plugin": "^10.0.0",
+    "crypto-js": "^4.2.0",
+    "date-fns": "^2.30.0",
+    "date-fns-jalali": "^2.30.0-0",
+    "dotenv": "^16.3.1",
+    "highcharts": "^11.2.0",
+    "highcharts-react-official": "3.2.1",
+    "i18next": "^23.2.3",
+    "i18next-browser-languagedetector": "7.1.0",
+    "i18next-scanner": "^4.2.0",
+    "lodash": "4.17.21",
+    "lottie-react": "2.4.0",
+    "moment": "^2.30.1",
+    "moment-jalaali": "^0.10.0",
+    "notistack": "^3.0.1",
+    "prop-types": "15.8.1",
+    "qs": "6.11.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet-async": "^1.3.0",
+    "react-i18next": "13.0.1",
+    "react-is": "^18.2.0",
+    "react-read-otp": "^1.0.0",
+    "react-redux": "^8.1.3",
+    "react-router-dom": "^6.21.1",
+    "react-test-renderer": "^18.2.0",
+    "react-verification-input": "4.1.0",
+    "redux": "^4.2.1",
+    "redux-batched-subscribe": "^0.1.6",
+    "redux-logger": "3.0.6",
+    "redux-persist": "6.0.0",
+    "redux-thunk": "^2.4.2",
+    "reduxjs-toolkit-persist": "^7.2.1",
+    "storage-manager-js": "4.2.1",
+    "styled-components": "5.3.11",
+    "swiper": "^10.3.1",
+    "uglifyjs-webpack-plugin": "^2.2.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/plugin-transform-private-property-in-object": "^7.22.11",
+    "@commitlint/cli": "^18.2.0",
+    "@commitlint/config-conventional": "^18.1.0",
+    "@craco/craco": "7.1.0",
+    "@types/jest": "29.5.1",
+    "@types/node": "^20.3.1",
+    "@types/shelljs": "0.8.12",
+    "@typescript-eslint/eslint-plugin": "6.2.1",
+    "@typescript-eslint/parser": "6.2.1",
+    "buffer": "^6.0.3",
+    "commitlint": "^18.2.0",
+    "compress-create-react-app": "1.4.4",
+    "craco-plugin-env": "^1.0.5",
+    "cross-env": "^7.0.3",
+    "eslint": "8.42.0",
+    "eslint-config-prettier": "8.9.0",
+    "eslint-config-react-app": "7.0.0",
+    "eslint-plugin-prettier": "5.0.0",
+    "eslint-plugin-react": "7.27.1",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-unused-imports": "3.0.0",
+    "husky": "^8.0.3",
+    "inquirer": "7.3.3",
+    "inquirer-directory": "^2.2.0",
+    "jest-worker": "^29.5.0",
+    "lint-staged": "^13.2.3",
+    "node-plop": "0.26.3",
+    "nodemon": "3.0.2",
+    "pinst": "^3.0.0",
+    "plop": "2.7.6",
+    "prettier": "2.8.8",
+    "pretty-quick": "^3.1.3",
+    "progress-bar-webpack-plugin": "^2.1.0",
+    "react-app-polyfill": "^3.0.0",
+    "react-scripts": "5.0.1",
+    "rimraf": "5.0.1",
+    "shelljs": "^0.8.5",
+    "standard-version": "^9.5.0",
+    "stylelint": "15.10.2",
+    "terser-webpack-plugin": "^5.3.10",
+    "ts-jest": "29.1.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5",
+    "web-vitals": "^3.5.1"
+  },
+  "optionalDependencies": {
+    "sanitize.css": "^13.0.0"
+  },
+  "resolutions": {
+    "react-scripts/**/eslint-config-react-app": "7.0.0"
+  }
+}

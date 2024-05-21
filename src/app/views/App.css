@@ -1,0 +1,217 @@
+@import url('../../assets/css/Pelak.css');
+
+* {
+  font-family: PelakFA, sans-serif !important;
+  direction: rtl;
+}
+
+body {
+  overflow-x: hidden !important;
+  overflow-y: auto;
+  background-color: #fafafa !important;
+}
+
+body::-webkit-scrollbar {
+  display: none !important;
+}
+
+.MuiDrawer-paper::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border: 1px solid #bdbdbd;
+  border-radius: 4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #433792;
+  border-radius: 3px;
+}
+
+.MuiPaper-root,
+.MuiCard-root {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  border-radius: 6px !important;
+}
+
+.MuiPaper-elevation1 {
+  box-shadow: 0 0px 12px 0px rgba(0, 0, 0, 0.054) !important;
+}
+
+.Mui-focusVisible:hover {
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.12) !important;
+}
+
+.MuiCardActionArea-root {
+  cursor: pointer !important;
+  transition: all 700ms;
+}
+
+.MuiCard-root:has(> .MuiCardActionArea-root):hover {
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.12) !important;
+}
+
+.MuiCardActionArea-focusHighlight {
+  background-color: #fff !important;
+}
+
+.PrivateDatePickerToolbar-penIcon {
+  visibility: hidden;
+}
+
+.TFContainer {
+  height: 40px;
+  width: 300px;
+  direction: ltr !important;
+}
+
+.character {
+  line-height: 40px;
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(128, 128, 128, 0.7);
+  border-radius: 6px;
+  margin-right: 9px;
+  cursor: text;
+}
+
+.character:first-child {
+  margin-left: 0;
+}
+
+.character--inactive {
+  background-color: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(128, 128, 128, 0.3);
+}
+
+.character--selected {
+  border: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+.progressBarContainer {
+  transform: rotate(180deg) !important;
+}
+
+.MuiBottomNavigationAction-label.Mui-selected {
+  font-size: 0.65rem !important;
+}
+
+.MuiAlert-outlinedSuccess {
+  background-color: #f3faf6 !important;
+  border: none !important;
+  border-bottom: 3px solid #30ac62 !important;
+}
+
+.MuiAlert-outlinedWarning {
+  background-color: #fffcf1 !important;
+  border: none !important;
+  border-bottom: 3px solid #f8cd11 !important;
+}
+
+.MuiAlert-outlinedError {
+  background-color: #fcf1f2 !important;
+  border: none !important;
+  border-bottom: 3px solid #d52333 !important;
+}
+
+.MuiAlert-message {
+  padding: 12px 4px 0px 4px !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 10000s ease-in-out 0s;
+}
+
+#arc-checkbox {
+  margin: 0 auto !important;
+}
+
+.MuiAlert-action {
+  margin-left: -8px !important;
+  margin-right: auto !important;
+  align-items: center !important;
+}
+
+.overflowY-hidden {
+  overflow-y: hidden !important;
+}
+
+.swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid black;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/*.swiper {*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*}*/
+
+/*.swiper-slide {*/
+/*  text-align: center;*/
+/*  font-size: 18px;*/
+/*  background: #fff;*/
+
+/*  !* Center slide text vertically *!*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*}*/
+
+/*.swiper-slide img {*/
+/*  display: block;*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*  object-fit: cover;*/
+/*}*/
+
+.MuiMenuItem-root {
+  font-size: 14px !important;
+}

@@ -1,0 +1,38 @@
+import { translations } from 'locales/translations';
+import { _t } from 'utils/messages';
+
+export const messages = {
+  Input_Global_Questionnaires: () => _t(translations.global.input.questionnaires),
+  Input_Global_TestDone: () => _t(translations.global.input.TestDone),
+  Input_Global_TestUndone: () => _t(translations.global.input.TestUndone),
+  Input_Global_QuestionNumber: () => _t(translations.global.input.questionNumber),
+  Input_Global_Item: () => _t(translations.global.input.item),
+  Input_Global_Cancel: () => _t(translations.global.input.cancel),
+  Input_Global_RequireTime: () => _t(translations.global.input.requireTime),
+  Input_Global_TestComplete: () => _t(translations.global.input.testComplete),
+  Input_Global_TestNotComplete: () => _t(translations.global.input.testNotComplete),
+  Input_Global_TestCompleting: () => _t(translations.global.input.testCompleting),
+  Input_Global_SearchAssessment: () => _t(translations.global.input.searchAssessment),
+  Input_Global_FinalSubmit: () => _t(translations.global.input.finalSubmit),
+  Input_Global_MyAssessmentList: () => _t(translations.global.input.MyAssessmentList),
+  Text_Global_ClickQuestionnaire: () => _t(translations.global.text.clickQuestionnaire),
+
+  Text_MyAssessmentInfo_TestStatue: () => _t(translations.myAssessment.info.text.testStatue),
+  Input_MyAssessmentInfo_ShowReport: () => _t(translations.myAssessment.info.input.showReport),
+  Input_MyAssessmentInfo_StartTest: () => _t(translations.myAssessment.info.input.startTest),
+  Input_MyAssessmentList_UnDoneAssessment: () => _t(translations.myAssessment.list.input.UnDoneAssessment),
+  Input_MyAssessmentList_DoneAssessment: () => _t(translations.myAssessment.list.input.doneAssessment),
+  Text_MyAssessmentList_CompleteAssessment: () => _t(translations.myAssessment.list.text.completeAssessment),
+  Text_MyAssessmentList_ShowReport: () => _t(translations.myAssessment.list.text.showReport),
+  Text_MyAssessmentList_AssignmentAssessment: () => _t(translations.myAssessment.list.text.assignmentAssessment),
+  Text_MyAssessmentList_AssignmentAssessmentUser: () => _t(translations.myAssessment.list.text.assignmentAssessmentUser),
+  Alert_MyAssessmentQuestions_Success_SubmitResult: () => _t(translations.myAssessment.questions.alert.success.submitResult),
+  Alert_MyAssessmentQuestions_Error_SubmitResult: () => _t(translations.myAssessment.questions.alert.error.submitResult),
+  Text_MyAssessmentQuestions_ConfirmAnswer: () => _t(translations.myAssessment.questions.text.confirmAnswer),
+  Text_MyAssessmentQuestions_Question: () => _t(translations.myAssessment.questions.text.question),
+  Text_MyAssessmentQuestions_From: () => _t(translations.myAssessment.questions.text.from),
+  Input_MyAssessmentQuestions_LoadingQuestions: () => _t(translations.myAssessment.questions.input.loadingQuestions),
+  Input_MyAssessmentQuestions_FinalConfirm: () => _t(translations.myAssessment.questions.input.finalConfirm),
+  Input_MyAssessmentQuestions_Previous: () => _t(translations.myAssessment.questions.input.previous),
+  Input_MyAssessmentQuestions_Next: () => _t(translations.myAssessment.questions.input.next),
+};

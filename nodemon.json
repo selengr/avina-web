@@ -1,0 +1,13 @@
+{
+  "name": "psya",
+  "verbose": true,
+  "watch": ["./package.json"],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "restartable": "r",
+  "nodemonConfig": {
+    "delay": 2500
+  },
+  "exec": "craco start"
+}

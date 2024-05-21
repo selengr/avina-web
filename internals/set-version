@@ -1,0 +1,30 @@
+#!/bin/bash
+
+while :
+do
+echo "Main Menu:"
+echo    "(0) Major-Release"
+echo    "(1) Minor-Release"
+echo    "(2) Alpha-Release"
+echo  "Please enter your choice:"
+read choice
+case $choice in
+    "0")
+    yarn release
+     exit 0
+    ;;
+    "1")
+    yarn minorRelease
+     exit 0
+    ;;
+    "2")
+    yarn alpharelease
+     exit 0
+    ;;
+    *)
+    echo "invalid answer, please try again"
+    ;;
+
+esac
+done
+

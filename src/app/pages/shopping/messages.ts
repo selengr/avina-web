@@ -1,0 +1,37 @@
+import { translations } from 'locales/translations';
+import { _t } from 'utils/messages';
+
+export const messages = {
+  Text_Global_Cost: () => _t(translations.global.text.cost),
+  Input_Global_Count: () => _t(translations.global.input.count),
+  Input_Global_UnitPrice: () => _t(translations.global.input.unitPrice),
+  Input_Global_Delete: () => _t(translations.global.input.delete),
+  Input_Global_Confirm: () => _t(translations.global.input.confirm),
+  Input_Global_Submit: () => _t(translations.global.input.confirm),
+  Input_Global_Cancel: () => _t(translations.global.input.cancel),
+
+  Text_ShoppingList_Number: () => _t(translations.shopping.list.checkItem.text.number),
+  Alert_ShoppingList_Success_DeleteFromCart: () => _t(translations.shopping.list.index.alert.success.deleteFromCart),
+  Alert_ShoppingList_Error_DeleteFromCart: () => _t(translations.shopping.list.index.alert.error.deleteFromCart),
+  Dialog_ShoppingList_DeleteFromCart: () => _t(translations.shopping.list.index.dialog.deleteFromCart),
+  Input_ShoppingList_OrderInfo: () => _t(translations.shopping.list.index.input.orderInfo),
+  Input_ShoppingList_Pay: () => _t(translations.shopping.list.index.input.pay),
+  Input_ShoppingList_FinalOrder: () => _t(translations.shopping.list.index.input.finalOrder),
+  Input_ShoppingList_TotalPrice: () => _t(translations.shopping.list.index.input.totalPrice),
+  Input_ShoppingList_Mhesam_Pay: () => _t(translations.shopping.list.index.input.mHesamPayment),
+  Input_ShoppingList_PaymentGateway: () => _t(translations.shopping.list.index.input.paymentGateway),
+  Input_ShoppingList_PurchaseInfo: () => _t(translations.shopping.list.index.input.purchaseInfo),
+  Input_Payment_Through_Mhesam: () => _t(translations.shopping.list.index.input.mHesamPay),
+  Text_ShoppingList_SumTotal: () => _t(translations.shopping.list.index.text.sumTotal),
+  Text_ShoppingList_Discount: () => _t(translations.shopping.list.index.text.discount),
+  Text_ShoppingList_Payable: () => _t(translations.shopping.list.index.text.payable),
+  Text_ShoppingList_EmptyCart: () => _t(translations.shopping.list.index.text.emptyCart),
+  Text_Payment_Deduction_Credits: () => _t(translations.shopping.list.index.text.deductionCredit),
+  Text_Mhesam_Pay_Next_Step: () => _t(translations.shopping.list.index.text.mhesamPayNextStep),
+  Text_Mhesam_Credit_After_Purchase: () => _t(translations.shopping.list.index.text.CreditAfterPurchase),
+  Text_Mhesam_Total_Credit: () => _t(translations.shopping.list.index.text.totalCredit),
+  Text_Mhesam_Choose_Credit_Pay: () => _t(translations.shopping.list.index.text.MhesamChooseCreditPay),
+  Text_Mhesam_Enter_Two_Factor_Code_Finalize_Order: () => _t(translations.shopping.list.index.text.finalizeTwoFactorCode),
+  Text_Mhesam_Send_New_Two_Factor_Code: () => _t(translations.shopping.list.index.text.sendNewTwoFactorCode),
+  Text_Mhesam_Pay: () => _t(translations.shopping.list.index.text.pay),
+};

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="55px" height="55px" viewBox="0 0 55 55" version="1.1" xmlns="http://www.w3.org/2000/svg"
+>
+    <title>Group 5</title>
+    <defs>
+        <filter color-interpolation-filters="auto" id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix"
+                           values="0 0 0 0 0.870588 0 0 0 0 0.454902 0 0 0 0 0.639216 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="User---My-Assessments" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Questions---User-" transform="translate(-659.000000, -727.000000)">
+            <g id="Group-5" transform="translate(660.000000, 727.000000)">
+                <circle id="Oval" stroke="#BDBDBD" stroke-width="2" cx="43" cy="7" r="6"></circle>
+                <circle id="Oval-Copy" stroke="#DE74A3" stroke-width="2" cx="43" cy="28" r="6"></circle>
+                <circle id="Oval-Copy-2" stroke="#BDBDBD" stroke-width="2" cx="43" cy="48" r="6"></circle>
+                <g filter="url(#filter-1)" id="Tik">
+                    <g transform="translate(33.000000, 14.000000)">
+                        <rect id="Rectangle-Copy-10" fill-opacity="0" fill="#FFFFFF" x="0" y="0" width="21"
+                              height="21"></rect>
+                        <path
+                                d="M15.0721837,16.8255278 L15.0721837,5.56026553 C15.0721837,5.08660171 14.6952728,4.69893533 14.2217964,4.68561176 L10.3097675,4.57552779"
+                                id="Path-10-Copy" stroke="#353535" stroke-width="2" stroke-linecap="round"
+                                transform="translate(12.690976, 10.700528) scale(-1, 1) rotate(-225.000000) translate(-12.690976, -10.700528) "></path>
+                    </g>
+                </g>
+                <line x1="32" y1="7.5" x2="-1.35447209e-14" y2="7.5" id="Line" stroke="#BDBDBD" stroke-width="2"
+                      stroke-linecap="round"></line>
+                <line x1="32" y1="27.5" x2="-4.34374758e-13" y2="27.5" id="Line-Copy" stroke="#BDBDBD" stroke-width="2"
+                      stroke-linecap="round"></line>
+                <line x1="32" y1="47.5" x2="-4.88220575e-13" y2="47.5" id="Line-Copy-2" stroke="#BDBDBD"
+                      stroke-width="2"
+                      stroke-linecap="round"></line>
+            </g>
+        </g>
+    </g>
+</svg>
