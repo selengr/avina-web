@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: APP_TITLE_TEMPLATE,
   },
   description: APP_DESCRIPTION,
-  keywords: '',
+  keywords: ['آوینا', 'Avina', 'IT', 'وب‌سایت', 'نرم‌افزار', 'شبکه'],
 };
 
 // ----------------------------------------------------------------------
