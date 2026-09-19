@@ -1,0 +1,48 @@
+.clip-rule {
+  @apply inline-flex h-full w-full flex-1;
+  /* چیدمان کلی */
+}
+
+.input-addon-before {
+  @apply flex items-center rounded-[999px] border border-gray-300 px-2.5 text-primary-text;
+}
+
+.input-addon-after {
+  @apply flex items-center rounded-[999px] border border-gray-300 px-2.5 text-primary-text;
+}
+
+.input-main {
+  @apply flex w-full items-center gap-2 border border-gray-300 overflow-hidden px-[14px] rounded-[999px] md:font-kalameh;
+}
+
+/* حذف radius سمت چپ */
+.input-main.no-radius-left {
+  @apply rounded-l-none;
+}
+
+/* حذف radius سمت راست */
+.input-main.no-radius-right {
+  @apply rounded-r-none;
+}
+
+.input-main .input-textbox {
+  @apply w-full flex-1 shrink font-normal text-primary-text outline-none placeholder:text-d-body2 placeholder:text-[#919EAB] md:placeholder:text-d-body1 md:placeholder:font-kalameh md:placeholder:text-[#919EAB] disabled:text-gray-500 disabled:placeholder:text-gray-600;
+  /* Textbox تمام عرض باقی‌مانده را بگیرد */
+}
+
+.input-prefix,
+.input-suffix {
+  @apply text-gray-500;
+  /* استایل‌های پیش‌فرض برای prefix و suffix */
+}
+
+.input-disabled {
+  @apply cursor-not-allowed bg-gray-200;
+}
+
+.input-disabled .input-addon-before,
+.input-disabled .input-addon-after,
+.input-disabled .input-main {
+  @apply pointer-events-none;
+  /* جلوگیری از کلیک */
+}

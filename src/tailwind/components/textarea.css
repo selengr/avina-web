@@ -1,0 +1,21 @@
+.textarea-wrapper {
+  @apply flex w-full flex-col gap-1;
+}
+
+.textarea {
+  @apply w-full resize-none rounded-[24px] border border-gray-300 px-3 py-2.5 text-d-body1 font-normal text-primary-text outline-none md:font-kalameh;
+  @apply placeholder:text-d-body1 placeholder:font-normal placeholder:text-disabled-text focus:border-info-darker focus:shadow-input-focused disabled:cursor-not-allowed disabled:bg-gray-200;
+}
+
+/* حالت ارور */
+.textarea-error {
+  @apply border-error-light focus:border-error-light focus:shadow-input-focused-error;
+}
+
+.textarea-helper {
+  @apply text-gray-600;
+}
+
+.textarea-helper-error {
+  @apply text-d-body2 text-error;
+}

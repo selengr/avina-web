@@ -1,0 +1,17 @@
+.swiperContainer {
+  padding-bottom: 20px;
+}
+
+.swiperScrollbar {
+  height: 3px !important;
+  background-color: rgba(200, 200, 200, 0.3) !important;
+  border-radius: 9999px !important;
+  width: 200px !important;
+}
+
+.swiperScrollbar :global(.swiper-scrollbar-drag) {
+  height: 100% !important;
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  border-radius: 9999px !important;
+  cursor: pointer !important;
+}

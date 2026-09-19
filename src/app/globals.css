@@ -1,0 +1,129 @@
+@import '../tailwind/components.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: theme('colors.primary');
+    --color-primary-light: theme('colors.primary-light');
+    --color-primary-lighter: theme('colors.primary-lighter');
+    --color-primary-dark: theme('colors.primary-dark');
+    --color-primary-darker: theme('colors.primary-darker');
+    --color-secondary: theme('colors.secondary');
+    --color-secondary-light: theme('colors.secondary-light');
+    --color-secondary-lighter: theme('colors.secondary-lighter');
+    --color-secondary-dark: theme('colors.secondary-dark');
+    --color-secondary-darker: theme('colors.secondary-darker');
+    --color-info: theme('colors.info');
+    --color-info-light: theme('colors.info-light');
+    --color-info-lighter: theme('colors.info-lighter');
+    --color-info-dark: theme('colors.info-dark');
+    --color-info-darker: theme('colors.info-darker');
+    --color-success: theme('colors.success');
+    --color-success-light: theme('colors.success-light');
+    --color-success-lighter: theme('colors.success-lighter');
+    --color-success-dark: theme('colors.success-dark');
+    --color-success-darker: theme('colors.success-darker');
+    --color-warning: theme('colors.warning');
+    --color-warning-light: theme('colors.warning-light');
+    --color-warning-lighter: theme('colors.warning-lighter');
+    --color-warning-dark: theme('colors.warning-dark');
+    --color-warning-darker: theme('colors.warning-darker');
+    --color-error: theme('colors.error');
+    --color-error-light: theme('colors.error-light');
+    --color-error-lighter: theme('colors.error-lighter');
+    --color-error-dark: theme('colors.error-dark');
+    --color-error-darker: theme('colors.error-darker');
+    --color-gray-100: theme('colors.gray-100');
+    --color-gray-200: theme('colors.gray-200');
+    --color-gray-300: theme('colors.gray-300');
+    --color-gray-400: theme('colors.gray-400');
+    --color-gray-500: theme('colors.gray-500');
+    --color-gray-600: theme('colors.gray-600');
+    --color-gray-700: theme('colors.gray-700');
+    --color-gray-800: theme('colors.gray-800');
+    --color-gray-900: theme('colors.gray-900');
+    --color-black: theme('colors.black');
+    --color-white: theme('colors.white');
+    --color-primary-text: theme('colors.primary-text');
+    --color-secondary-text: theme('colors.secondary-text');
+    --color-disabled: theme('colors.disabled');
+    --color-divider: theme('colors.divider');
+    --color-background: theme('colors.background');
+    --color-paper: theme('colors.paper');
+    --color-neutral: theme('colors.neutral');
+    --color-transparent: theme('colors.transparent');
+    --color-inherit: theme('colors.inherit');
+
+    --shadow-z1: theme('boxShadow.z1');
+    --shadow-z4: theme('boxShadow.z4');
+    --shadow-z8: theme('boxShadow.z8');
+    --shadow-z12: theme('boxShadow.z12');
+    --shadow-z16: theme('boxShadow.z16');
+    --shadow-z20: theme('boxShadow.z20');
+    --shadow-z24: theme('boxShadow.z24');
+    --shadow-card: theme('boxShadow.card');
+    --shadow-drop-down: theme('boxShadow.drop-down');
+    --shadow-dialog: theme('boxShadow.dialog');
+    --shadow-input-focused: theme('boxShadow.input-focused');
+    --shadow-input-focused-error: theme('boxShadow.input-focused-error');
+    --shadow-primary: theme('boxShadow.primary');
+    --shadow-secondary: theme('boxShadow.secondary');
+    --shadow-info: theme('boxShadow.info');
+    --shadow-success: theme('boxShadow.success');
+    --shadow-warning: theme('boxShadow.warning');
+    --shadow-error: theme('boxShadow.error');
+    --shadow-none: theme('boxShadow.none');
+  }
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+/* Style scrollbar */
+@media only screen and (hover: hover) {
+  /* width */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 4px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-gray-400);
+    border-radius: 999px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  body ::-webkit-scrollbar-thumb {
+    background: var(--color-gray-400);
+  }
+
+  @media screen and (min-width: 1024px) {
+    body {
+      &::-webkit-scrollbar-track {
+        background: var(--color-gray-400);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--blue-green-800);
+      }
+    }
+  }
+}
