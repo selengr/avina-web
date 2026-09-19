@@ -1,0 +1,3 @@
+.helper-text {
+  @apply mt-1.5 flex items-center gap-2 text-d-body2 md:font-kalameh;
+}

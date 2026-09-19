@@ -1,36 +1,27 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
-    "noImplicitAny": false,
-    "target": "esnext",
-    "lib": ["dom", "es5", "es2015", "es6", "es2016", "es7", "es2017", "es2018", "es2019", "es2020", "es2021", "esnext", "WebWorker", "ScriptHost"],
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "esModuleInterop": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "noFallthroughCasesInSwitch": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "incremental": true,
-    "noUnusedParameters": false,
-    "sourceMap": true,
-    "declaration": true,
-    "noUnusedLocals": false,
-    "allowSyntheticDefaultImports": true,
-    "removeComments": true,
-    "typeRoots": ["node_modules/@types", "src/types/images.d.ts", "src/types/fonts.d.ts"],
-    "baseUrl": "./src/",
-    "rootDir": "src",
-    "outDir": "build",
-    "importHelpers": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "build"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }
