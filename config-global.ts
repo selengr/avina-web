@@ -1,9 +1,8 @@
-
-export const APP_NAME = "آوینــــــــا";
-export const APP_DEFAULT_TITLE = "آوینــــــــا";
-export const APP_TITLE_TEMPLATE = "%s - آوینــــــــا";
-export const APP_DESCRIPTION = "آوینــــــــا | ما یک تیم خلاق و قدرتمند هستیم";
-
+export const APP_NAME = 'آوینا';
+export const APP_DEFAULT_TITLE = 'آوینا | راهکارهای فناوری اطلاعات';
+export const APP_TITLE_TEMPLATE = '%s | آوینا';
+export const APP_DESCRIPTION =
+  'وب‌سایت شرکت آوینا — خدمات نرم‌افزار، سخت‌افزار، شبکه و پشتیبانی';
 
 // API
 // ----------------------------------------------------------------------
