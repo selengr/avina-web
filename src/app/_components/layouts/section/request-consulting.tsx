@@ -27,6 +27,8 @@ import { VerticalImage } from '../../common/vertical-image/vertical-image';
 // );
 import SelectBoxController from '../../common/field/select-box/select-box-controller';
 import StylizedButton from '../../common/field/button/stylized-button';
+import httpService from '@/services/api/http-service';
+import { HOST_API_KEY } from '../../../../../config-global';
 
 type ConsultingFormValues = {
   education: string;
@@ -47,16 +49,25 @@ const RequestConsulting = () => {
     },
   });
 
-  const onSubmit = handleSubmit((values) => {
-    // Hook up to the consulting API when the backend endpoint is ready.
-    window.alert(
-      `درخواست مشاوره برای ${values.name} ${values.lastName} ثبت شد.`
-    );
-    reset();
+  const onSubmit = handleSubmit(async (values) => {
+    try {
+      if (HOST_API_KEY) {
+        await httpService.post('/api/v1/public/consulting', values);
+      }
+      window.alert(
+        `درخواست مشاوره برای ${values.name} ${values.lastName} ثبت شد.`
+      );
+      reset();
+    } catch {
+      window.alert('ارسال درخواست انجام نشد. لطفاً دوباره تلاش کنید.');
+    }
   });
 
   return (
-    <Section className="flex flex-col lg:flex-row lg:justify-center lg:items-center xs:pt-24 lg:pt-24 lg:pb-4">
+    <Section
+      id="consulting"
+      className="flex flex-col lg:flex-row lg:justify-center lg:items-center xs:pt-24 lg:pt-24 lg:pb-4 scroll-mt-24"
+    >
       <div className="w-full lg:w-[50%] mb-6 lg:mb-0 lg:ml-20">
         <div
           className={`h-28 lg:h-40 w-[70%]  max-w-[600px] rounded-t-[2rem] p-4 pt-4 font-medium relative`}

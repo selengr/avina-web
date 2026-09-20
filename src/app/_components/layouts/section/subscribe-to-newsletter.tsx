@@ -1,10 +1,10 @@
 'use client';
+
 import { useForm } from 'react-hook-form';
 
 import {
   Form,
   Title,
-  Button,
   Wrapper,
   FormRow,
   Section,
@@ -16,15 +16,36 @@ import {
 import { IconEmail } from '../../icons/icons';
 import { VerticalImage } from '../../common/vertical-image/vertical-image';
 import StylizedButton from '../../common/field/button/stylized-button';
+import httpService from '@/services/api/http-service';
+import { HOST_API_KEY } from '../../../../../config-global';
+
+type NewsletterFormValues = {
+  email: string;
+};
 
 const SubscribeToNewsletter = () => {
-  const { control } = useForm<any>({});
+  const { control, handleSubmit, reset } = useForm<NewsletterFormValues>({
+    defaultValues: { email: '' },
+  });
+
+  const onSubmit = handleSubmit(async (values) => {
+    try {
+      if (HOST_API_KEY) {
+        await httpService.post('/api/v1/public/newsletter', {
+          email: values.email,
+        });
+      }
+      window.alert(`عضویت با ایمیل ${values.email} ثبت شد.`);
+      reset();
+    } catch {
+      window.alert('ثبت‌نام انجام نشد. لطفاً دوباره تلاش کنید.');
+    }
+  });
 
   return (
     <Section>
       <Form
-        // disabled={isFormDisabled}
-        // loading={isFormDisabled}
+        onSubmit={onSubmit}
         className="p-4 xs:p-8 bg-white rounded-[32px] md:h-[345px] relative"
         customClasses={{
           fieldsetWrapper:
@@ -34,8 +55,7 @@ const SubscribeToNewsletter = () => {
         <Wrapper className="md:max-w-[30%]">
           <Title>اشتراک در خبرنامه</Title>
           <Description>
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-            استفاده از طراحان گرافیک است.
+            ایمیل‌تان را بگذارید تا خبرهای جدید آوینا را برایتان بفرستیم.
           </Description>
         </Wrapper>
 
@@ -43,21 +63,25 @@ const SubscribeToNewsletter = () => {
           <FormRow>
             <InputGroup>
               <InputLabel
-                name="lastName"
+                name="email"
                 className="text-secondary"
               >
                 آدرس ایمیل
               </InputLabel>
               <InputController
-                id="lastName"
-                name="lastName"
+                id="email"
+                name="email"
                 control={control}
                 rules={{
-                  required: 'آدرس ایمیل  ضروری است',
+                  required: 'آدرس ایمیل ضروری است',
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: 'ایمیل معتبر نیست',
+                  },
                 }}
-                placeholder="info@Avina.com"
+                placeholder="info@avina.com"
                 direction="ltr"
-                type="number"
+                type="email"
                 addonBefore={
                   <IconEmail
                     width="20"
@@ -67,21 +91,21 @@ const SubscribeToNewsletter = () => {
                     stroke="none"
                   />
                 }
-                //   disabled={isFormDisabled}
               />
             </InputGroup>
           </FormRow>
 
-          <div className="flex justify-end w-full pt-7 md:absolute md:1bottom-20">
+          <div className="flex justify-end w-full pt-7 md:absolute md:bottom-0">
             <StylizedButton
-              className="py-7 px-[6px]  min-w-52"
-              text={'عضویت'}
-            />{' '}
+              className="py-7 px-[6px] min-w-52"
+              text="عضویت"
+              type="submit"
+            />
           </div>
         </div>
 
         <VerticalImage
-          className="w-12 h-full bottom-0 -left-12 "
+          className="w-12 h-full bottom-0 -left-12"
           src="newsletter"
         />
       </Form>

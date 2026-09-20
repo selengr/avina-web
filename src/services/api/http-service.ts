@@ -3,38 +3,33 @@ import axios, { AxiosResponse } from 'axios';
 import { HOST_API_KEY } from '../../../config-global';
 
 const httpService = axios.create({
-  baseURL: HOST_API_KEY,
+  baseURL: HOST_API_KEY || undefined,
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 12000,
 });
 
 httpService.interceptors.request.use(
   (config) => {
-    console.log('HOST_API_KEY===', config);
-    // اضافه کردن توکن یا هدرهای موردنیاز
+    if (!HOST_API_KEY) {
+      return Promise.reject(new Error('API base URL is not configured'));
+    }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 httpService.interceptors.response.use(
-  <T>(res: AxiosResponse<IApiResponse<T>>) => {
-    return res;
-  },
-  (error) => {
-    console.log('error===', error);
-    return Promise.reject(error);
-  }
+  <T>(res: AxiosResponse<IApiResponse<T>>) => res,
+  (error) => Promise.reject(error)
 );
 
-const get = <T>(url: string, params?: any) => {
+const get = <T>(url: string, params?: unknown) => {
   return httpService.get<any, IApiResponse<T>>(url, { params });
 };
 
-const post = <T>(url: string, data: any) => {
+const post = <T>(url: string, data: unknown) => {
   return httpService.post<any, IApiResponse<T>>(url, data);
 };
 
