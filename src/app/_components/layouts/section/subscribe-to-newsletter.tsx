@@ -62,20 +62,21 @@ const SubscribeToNewsletter = () => {
     <Section>
       <Form
         onSubmit={onSubmit}
-        className="p-4 xs:p-6 md:p-8 bg-white rounded-[32px] relative overflow-hidden"
+        className="p-4 xs:p-8 bg-white rounded-[32px] md:h-[345px] relative"
         customClasses={{
           fieldsetWrapper:
-            'flex flex-col md:flex-row gap-6 md:gap-10 md:items-center md:justify-between',
+            'flex flex-col md:flex-row h-full md:justify-around md:items-center',
         }}
       >
-        <Wrapper className="md:max-w-[40%]">
+        <Wrapper className="md:max-w-[30%]">
           <Title>اشتراک در خبرنامه</Title>
           <Description>
-            ایمیل‌تان را بگذارید تا خبرهای جدید آوینا را برایتان بفرستیم.
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
+            استفاده از طراحان گرافیک است.
           </Description>
         </Wrapper>
 
-        <div className="relative w-full md:w-[55%] md:max-w-[420px]">
+        <div className="relative w-full md:w-[50%] md:max-w-[40%]">
           <FormRow>
             <InputGroup>
               <InputLabel
@@ -89,13 +90,13 @@ const SubscribeToNewsletter = () => {
                 name="email"
                 control={control}
                 rules={{
-                  required: 'آدرس ایمیل ضروری است',
+                  required: 'آدرس ایمیل  ضروری است',
                   pattern: {
                     value: emailPattern,
                     message: 'ایمیل معتبر نیست',
                   },
                 }}
-                placeholder="info@avina.com"
+                placeholder="info@Avina.com"
                 direction="ltr"
                 type="email"
                 addonBefore={
@@ -111,28 +112,27 @@ const SubscribeToNewsletter = () => {
             </InputGroup>
           </FormRow>
 
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 w-full pt-5">
-            {message ? (
-              <p
-                className={`text-m-body2 ${
-                  status === 'error' ? 'text-error' : 'text-primary'
-                }`}
-              >
-                {message}
-              </p>
-            ) : (
-              <span />
-            )}
+          {message ? (
+            <p
+              className={`text-m-body2 pt-3 ${
+                status === 'error' ? 'text-error' : 'text-primary'
+              }`}
+            >
+              {message}
+            </p>
+          ) : null}
+
+          <div className="flex justify-end w-full pt-7 md:absolute md:1bottom-20">
             <StylizedButton
-              className="min-w-44 self-end"
-              text={status === 'loading' ? 'در حال ذخیره...' : 'عضویت'}
+              className="py-7 px-[6px]  min-w-52"
+              text={status === 'loading' ? 'در حال ارسال...' : 'عضویت'}
               type="submit"
             />
           </div>
         </div>
 
         <VerticalImage
-          className="hidden md:block w-12 h-full bottom-0 -left-12"
+          className="w-12 h-full bottom-0 -left-12 "
           src="newsletter"
         />
       </Form>
