@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import {
@@ -16,29 +17,43 @@ import {
 import { IconEmail } from '../../icons/icons';
 import { VerticalImage } from '../../common/vertical-image/vertical-image';
 import StylizedButton from '../../common/field/button/stylized-button';
-import httpService from '@/services/api/http-service';
-import { HOST_API_KEY } from '../../../../../config-global';
 
 type NewsletterFormValues = {
   email: string;
 };
 
 const SubscribeToNewsletter = () => {
+  const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>(
+    'idle'
+  );
+  const [message, setMessage] = useState('');
   const { control, handleSubmit, reset } = useForm<NewsletterFormValues>({
     defaultValues: { email: '' },
   });
 
   const onSubmit = handleSubmit(async (values) => {
+    setStatus('loading');
+    setMessage('');
     try {
-      if (HOST_API_KEY) {
-        await httpService.post('/api/v1/public/newsletter', {
-          email: values.email,
-        });
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: values.email }),
+      });
+      const result = await response.json();
+      if (!response.ok || !result?.success) {
+        throw new Error(result?.message || 'error');
       }
-      window.alert(`عضویت با ایمیل ${values.email} ثبت شد.`);
+      setStatus('done');
+      setMessage(result.message || 'ایمیل ذخیره شد.');
       reset();
-    } catch {
-      window.alert('ثبت‌نام انجام نشد. لطفاً دوباره تلاش کنید.');
+    } catch (error) {
+      setStatus('error');
+      setMessage(
+        error instanceof Error && error.message !== 'error'
+          ? error.message
+          : 'ثبت‌نام انجام نشد. لطفاً دوباره تلاش کنید.'
+      );
     }
   });
 
@@ -46,20 +61,20 @@ const SubscribeToNewsletter = () => {
     <Section>
       <Form
         onSubmit={onSubmit}
-        className="p-4 xs:p-8 bg-white rounded-[32px] md:h-[345px] relative"
+        className="p-4 xs:p-6 md:p-8 bg-white rounded-[32px] relative overflow-hidden"
         customClasses={{
           fieldsetWrapper:
-            'flex flex-col md:flex-row h-full md:justify-around md:items-center',
+            'flex flex-col md:flex-row gap-6 md:gap-10 md:items-center md:justify-between',
         }}
       >
-        <Wrapper className="md:max-w-[30%]">
+        <Wrapper className="md:max-w-[40%]">
           <Title>اشتراک در خبرنامه</Title>
           <Description>
             ایمیل‌تان را بگذارید تا خبرهای جدید آوینا را برایتان بفرستیم.
           </Description>
         </Wrapper>
 
-        <div className="relative w-full md:w-[50%] md:max-w-[40%]">
+        <div className="relative w-full md:w-[55%] md:max-w-[420px]">
           <FormRow>
             <InputGroup>
               <InputLabel
@@ -95,17 +110,28 @@ const SubscribeToNewsletter = () => {
             </InputGroup>
           </FormRow>
 
-          <div className="flex justify-end w-full pt-7 md:absolute md:bottom-0">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 w-full pt-5">
+            {message ? (
+              <p
+                className={`text-m-body2 ${
+                  status === 'error' ? 'text-error' : 'text-primary'
+                }`}
+              >
+                {message}
+              </p>
+            ) : (
+              <span />
+            )}
             <StylizedButton
-              className="py-7 px-[6px] min-w-52"
-              text="عضویت"
+              className="min-w-44 self-end"
+              text={status === 'loading' ? 'در حال ذخیره...' : 'عضویت'}
               type="submit"
             />
           </div>
         </div>
 
         <VerticalImage
-          className="w-12 h-full bottom-0 -left-12"
+          className="hidden md:block w-12 h-full bottom-0 -left-12"
           src="newsletter"
         />
       </Form>

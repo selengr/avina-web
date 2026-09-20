@@ -42,6 +42,9 @@ yarn-error.log*
 # local tooling
 .tools/
 
+# form submissions saved by local API routes
+/data/
+
 # boilerplate internals
 generated-cra-app
 .cra-template-rb

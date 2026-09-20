@@ -20,15 +20,19 @@ import {
 
 const defaultBreakpoints = {
   0: {
-    slidesPerView: 1.25,
+    slidesPerView: 1.05,
+    spaceBetween: 10,
+  },
+  480: {
+    slidesPerView: 1.2,
     spaceBetween: 12,
   },
   640: {
-    slidesPerView: 1.75,
-    spaceBetween: 16,
+    slidesPerView: 1.6,
+    spaceBetween: 14,
   },
   768: {
-    slidesPerView: 2.25,
+    slidesPerView: 2.1,
     spaceBetween: 16,
   },
   1024: {
@@ -49,11 +53,11 @@ export default function SwiperSlider({
   const nextRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <div className={`w-full pt-10 md:pt-12 ${className}`}>
-      <div className="relative">
+    <div className={`w-full pt-8 md:pt-12 overflow-x-hidden ${className}`}>
+      <div className="relative px-1 sm:px-0">
         {title && (
-          <div className="mb-2 flex items-center justify-between gap-4">
-            <Title className="pr-4 md:pr-0 mb-0">{title}</Title>
+          <div className="mb-3 md:mb-2 flex items-center justify-between gap-3 px-3 md:px-0">
+            <Title className="pr-0 mb-0 text-m-h5 md:text-inherit">{title}</Title>
             <div className="hidden md:flex items-center gap-2 pl-1">
               <button
                 ref={prevRef}
@@ -89,10 +93,12 @@ export default function SwiperSlider({
 
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y]}
-          slidesPerView={1.25}
-          spaceBetween={12}
+          slidesPerView={1.05}
+          spaceBetween={10}
           grabCursor
           watchOverflow
+          nested={false}
+          resistanceRatio={0.65}
           onBeforeInit={(swiper: SwiperType) => {
             const navigation = swiper.params.navigation;
             if (navigation && typeof navigation !== 'boolean') {

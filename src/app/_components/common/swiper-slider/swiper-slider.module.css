@@ -1,6 +1,12 @@
 .swiperContainer {
-  padding-bottom: 36px;
-  overflow: visible;
+  padding-bottom: 40px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.swiperContainer :global(.swiper-slide) {
+  height: auto;
+  box-sizing: border-box;
 }
 
 .swiperContainer :global(.swiper-pagination) {

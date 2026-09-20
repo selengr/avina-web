@@ -44,9 +44,9 @@ const AnimatedTestimonials = ({
   );
 
   return (
-    <div className="relative w-[95%] lg:w-full max-w-[816px] antialiased font-sans px-4 md:px-16 lg:px-16 xl:px-28 pt-12">
-      <div className="relative gap-52">
-        <div className="relative h-52 xs:h-64 md:h-80 w-full">
+    <div className="relative w-full max-w-[816px] antialiased font-sans px-2 xs:px-4 md:px-16 lg:px-16 xl:px-28 pt-8 md:pt-12 overflow-hidden">
+      <div className="relative">
+        <div className="relative h-[340px] xs:h-[360px] md:h-80 w-full">
           <AnimatePresence>
             {testimonials.map((testimonial, index) => {
               const isActive = index === active;
@@ -78,7 +78,7 @@ const AnimatedTestimonials = ({
                 >
                   <div
                     className={cn(
-                      'h-[300px] xs:h-[320px] w-full md:h-[319px] rounded-3xl relative shadow-sm',
+                      'min-h-[280px] h-auto xs:min-h-[300px] w-full md:h-[319px] rounded-3xl relative shadow-sm p-4 pb-6',
                       testimonial.className
                     )}
                   >
@@ -89,7 +89,7 @@ const AnimatedTestimonials = ({
                         width={100}
                         height={100}
                         draggable={false}
-                        className="h-[80px] md:h-[120px] w-[80px] md:w-[120px] rounded-full object-cover object-center absolute left-[40%] -top-10 md:-top-12"
+                        className="h-[64px] md:h-[120px] w-[64px] md:w-[120px] rounded-full object-cover object-center absolute left-1/2 -translate-x-1/2 -top-8 md:-top-12"
                       />
                     )}
 
@@ -99,17 +99,17 @@ const AnimatedTestimonials = ({
                       width={100}
                       height={100}
                       draggable={false}
-                      className="h-[40px] w-[60px] md:h-[95px] md:w-[143px] object-cover object-center absolute left-6 top-28 md:top-12"
+                      className="h-[28px] w-[42px] md:h-[95px] md:w-[143px] object-cover object-center absolute left-4 top-16 md:left-6 md:top-12 opacity-80"
                     />
 
-                    <h5 className="flex justify-center pt-[72px] font-kalameh font-bold text-d-h5 text-primary">
+                    <h5 className="flex justify-center pt-12 md:pt-[72px] font-kalameh font-bold text-m-h5 md:text-d-h5 text-primary">
                       {testimonial.name}
                     </h5>
-                    <p className="text-center text-m-caption text-secondary mt-1">
+                    <p className="text-center text-m-caption text-secondary mt-1 px-2">
                       {testimonial.designation}
                     </p>
 
-                    <Description className="flex justify-center pt-4 md:pt-6 text-d-body1 text-secondary px-7 text-justify">
+                    <Description className="flex justify-center pt-3 md:pt-6 text-m-body2 md:text-d-body1 text-secondary px-4 md:px-7 text-justify">
                       {testimonial.quote}
                     </Description>
                   </div>
@@ -120,13 +120,13 @@ const AnimatedTestimonials = ({
         </div>
       </div>
 
-      <div className="flex justify-between flex-col pt-14 md:py-4">
-        <div className="flex gap-4 pt-12 md:pt-12 w-full">
+      <div className="flex justify-center md:justify-between flex-col pt-6 md:py-4">
+        <div className="flex gap-4 justify-center md:justify-start pt-4 md:pt-12 w-full relative">
           <button
             type="button"
             onClick={handlePrev}
             aria-label="نظر قبلی"
-            className="h-10 w-10 rounded-full md:absolute md:left-0 md:top-[45%] flex items-center justify-center group/button hover:opacity-80 transition-opacity"
+            className="h-10 w-10 rounded-full md:absolute md:left-0 md:top-[45%] flex items-center justify-center hover:opacity-80 transition-opacity"
           >
             <IconCircleArrowLeft
               width="36"
@@ -140,7 +140,7 @@ const AnimatedTestimonials = ({
             type="button"
             onClick={handleNext}
             aria-label="نظر بعدی"
-            className="h-10 w-10 rounded-full md:absolute md:right-0 md:top-[45%] flex items-center justify-center group/button hover:opacity-80 transition-opacity"
+            className="h-10 w-10 rounded-full md:absolute md:right-0 md:top-[45%] flex items-center justify-center hover:opacity-80 transition-opacity"
           >
             <IconCircleArrowRight
               width="36"

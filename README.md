@@ -35,15 +35,14 @@ npm run build
 npm start
 ```
 
-## Env (optional)
+## Forms (local save)
 
-If you have a backend, put the API base URL in `.env.local`:
+Newsletter and consulting forms post to:
 
-```bash
-NEXT_PUBLIC_HOST_API_KEY=https://your-api.example.com
-```
+- `POST /api/newsletter` `{ "email": "..." }`
+- `POST /api/consulting` `{ "education", "name", "lastName", "phone", "description" }`
 
-Without it, the site still runs with local fallbacks.
+Saved under the local `data/` folder (gitignored).
 
 ## Note
 
