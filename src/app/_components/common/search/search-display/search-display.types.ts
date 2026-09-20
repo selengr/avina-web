@@ -7,5 +7,5 @@ export interface ISearchDisplayProps {
   searchResults: ISearchQueryString[];
   onClearSearchHistory: () => void;
   onResultClick: (query: string) => void;
-  setIsOpen: (isOpen: boolean) => void;
+  setIsOpen?: (isOpen: boolean) => void;
 }

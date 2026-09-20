@@ -57,29 +57,29 @@ const InfiniteMovingCards = ({
   }, [direction, speed]);
 
   return (
-    <div className="h-[154px] flex antialiased items-center justify-center relative w-screen">
+    <div className="h-[140px] md:h-[154px] flex antialiased items-center justify-center relative w-full overflow-hidden">
       <div
         ref={containerRef}
         className={cn(
-          'scroller relative z-20 border-y border-divider overflow-hidden',
+          'scroller relative z-20 w-full border-y border-divider overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]',
           className
         )}
       >
         <ul
           ref={scrollerRef}
           className={cn(
-            'flex shrink-0 gap-4 py-1 flex-nowrap items-center justify-center',
+            'flex w-max shrink-0 gap-4 py-1 flex-nowrap items-center',
             start && 'animate-scroll',
             pauseOnHover && 'hover:[animation-play-state:paused]'
           )}
         >
           {items.map((item) => (
             <li
-              className="w-[200px] relative flex-shrink-0 px-2 py-6 md:py-9"
+              className="w-[180px] md:w-[200px] relative flex-shrink-0 px-2 py-6 md:py-9"
               key={item.src}
             >
-              <div className="relative z-20 leading-[1.6] flex flex-row items-center justify-center">
-                <div className="w-[236px] flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity">
+              <div className="relative z-20 flex flex-row items-center justify-center">
+                <div className="w-[200px] md:w-[236px] flex items-center justify-center opacity-75 hover:opacity-100 transition-opacity">
                   <Image
                     src={`/logo/${item.src}.svg`}
                     alt={item.name}
@@ -93,7 +93,7 @@ const InfiniteMovingCards = ({
                     alt=""
                     width={26}
                     height={26}
-                    className="mr-12 ml-2"
+                    className="mr-8 ml-2"
                   />
                 </div>
               </div>

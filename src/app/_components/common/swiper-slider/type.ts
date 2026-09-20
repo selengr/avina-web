@@ -16,5 +16,7 @@ export interface ISwiperSliderProps {
   };
   className?: string;
   hasScroll?: boolean;
+  /** Show prev/next controls (default true when multiple slides). */
+  showNav?: boolean;
   renderSlide: (project: ICardSwiperSlider) => React.ReactNode;
 }

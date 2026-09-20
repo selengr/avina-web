@@ -9,63 +9,67 @@ import SwiperSlider from '../../../_components/common/swiper-slider/SwiperSlider
 import { ICardSwiperSlider } from '../../../_components/common/swiper-slider/type';
 import StylizedButton from '../../../_components/common/field/button/stylized-button';
 import { cn } from '@/lib/utils';
+import { PATH_PAGE } from '../../../../../routes/paths';
 
-const defaultCards = [
+const defaultCards: ICardSwiperSlider[] = [
   {
     id: 1,
-    title: 'card1',
+    title: 'سیستم مدیریت مشتریان',
     image: 'images/card1.svg',
-    link: '#',
+    link: 'crm',
   },
   {
     id: 2,
-    title: 'card3',
+    title: 'فروشگاه آنلاین',
     image: 'images/card3.svg',
-    link: '#',
+    link: 'shop',
   },
   {
     id: 3,
-    title: 'card2',
+    title: 'اپ مدیریت پروژه',
     image: 'images/card2.svg',
-    link: '#',
+    link: 'pm-app',
   },
   {
     id: 4,
-    title: 'card1',
+    title: 'پرتال داخلی',
     image: 'images/card1.svg',
-    link: '#',
+    link: 'intranet',
   },
   {
     id: 5,
-    title: 'card3',
+    title: 'امنیت داده',
     image: 'images/card3.svg',
-    link: '#',
+    link: 'data-secure',
   },
   {
     id: 6,
-    title: 'card2',
+    title: 'اتوماسیون اداری',
     image: 'images/card2.svg',
-    link: '#',
+    link: 'automation',
   },
 ];
 
-const renderSlide = (project: ICardSwiperSlider) => {
+function RelatedProjectSlide({ project }: { project: ICardSwiperSlider }) {
   const { push } = useRouter();
   const [isHovered, setIsHovered] = useState(false);
+  const imageSrc = project.image?.startsWith('/')
+    ? project.image
+    : `/${project.image || 'images/placeholder.svg'}`;
 
   return (
     <Card
-      className="group relative overflow-hidden transition-all hover:shadow-lg"
+      className="group relative h-full overflow-hidden rounded-3xl border-none bg-transparent shadow-none transition-all"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative overflow-hidden rounded-3xl">
+      <div className="relative overflow-hidden rounded-3xl shadow-sm">
         <Image
-          src={'/' + project.image || '/images/placeholder.svg'}
+          src={imageSrc}
           alt={project.title}
           width={300}
           height={225}
-          className="h-full w-full object-cover transition-transform duration-300"
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
         {isHovered && (
           <GifScreen
@@ -82,13 +86,13 @@ const renderSlide = (project: ICardSwiperSlider) => {
       </div>
 
       <StylizedButton
-        className="py-7 px-[6px]"
-        text={' طراحی و پیاده سازی وب سایت خودروسازی شرکت بنتلی...'}
-        onClick={() => push(`/portfolio/${project.title}`)}
+        className="my-2 md:mt-3 py-2"
+        text={project.title}
+        onClick={() => push(PATH_PAGE.portfolio.design(project.link))}
       />
     </Card>
   );
-};
+}
 
 const RelatedProjects = () => {
   return (
@@ -96,7 +100,7 @@ const RelatedProjects = () => {
       <SwiperSlider
         title="پروژه های مرتبط"
         cards={defaultCards}
-        renderSlide={renderSlide}
+        renderSlide={(project) => <RelatedProjectSlide project={project} />}
         className="md:px-4 lg:px-8 2xl:px-48"
         hasScroll={true}
       />
