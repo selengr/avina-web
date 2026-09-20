@@ -72,3 +72,11 @@ export async function saveConsultingRequest(
   await writeJsonArray('consulting.json', rows);
   return entry;
 }
+
+export async function listNewsletterEmails(): Promise<NewsletterEntry[]> {
+  return readJsonArray<NewsletterEntry>('newsletter.json');
+}
+
+export async function listConsultingRequests(): Promise<ConsultingEntry[]> {
+  return readJsonArray<ConsultingEntry>('consulting.json');
+}

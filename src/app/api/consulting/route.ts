@@ -1,6 +1,22 @@
 import { NextResponse } from 'next/server';
-import { saveConsultingRequest } from '@/lib/submissions-store';
+import {
+  listConsultingRequests,
+  saveConsultingRequest,
+} from '@/lib/submissions-store';
+import { canReadSubmissions } from '@/lib/submissions-auth';
 import { consultingSchema } from '@/lib/validation/forms';
+
+export async function GET(request: Request) {
+  if (!canReadSubmissions(request)) {
+    return NextResponse.json(
+      { success: false, message: 'Unauthorized' },
+      { status: 401 }
+    );
+  }
+
+  const data = await listConsultingRequests();
+  return NextResponse.json({ success: true, data });
+}
 
 export async function POST(request: Request) {
   try {

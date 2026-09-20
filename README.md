@@ -10,6 +10,7 @@ I use this as a real project in my portfolio. It's Persian / RTL and built with 
 - Consulting request form
 - News section (falls back to sample cards if the API is offline)
 - Shared header / footer layout
+- Fonts, images, and videos under `public/`
 
 ## Stack
 
@@ -23,6 +24,7 @@ I use this as a real project in my portfolio. It's Persian / RTL and built with 
 
 ```bash
 npm install
+cp .env.local.example .env.local
 npm run dev
 ```
 
@@ -35,11 +37,19 @@ npm run build
 npm start
 ```
 
-## جستجو
+## Env
 
-- صفحه `/search` برای جستجو بین صفحات، خدمات و نمونه کارها (`?q=` و `?kind=`)
-- فیلتر دسته‌بندی + جستجوی متنی در صفحه نمونه کارها
-- جزئیات هر پروژه در `/portfolio/[slug]` از کاتالوگ مشترک خوانده می‌شود
+See `.env.local.example`:
+
+- `NEXT_PUBLIC_HOST_API_KEY` — backend base URL (optional)
+- `NEXT_PUBLIC_SITE_URL` — used by sitemap / robots
+- `SUBMISSIONS_READ_TOKEN` — optional token to read saved form submissions
+
+## Search
+
+- `/search` for pages, services, and portfolio (`?q=` and `?kind=`)
+- Category filter + text search on the portfolio page
+- Project details at `/portfolio/[slug]`
 
 ## Forms (local save)
 
@@ -48,16 +58,20 @@ Newsletter and consulting forms post to:
 - `POST /api/newsletter` `{ "email": "..." }`
 - `POST /api/consulting` `{ "education", "name", "lastName", "phone", "description" }`
 
-Shared Zod schemas live in `src/lib/validation/forms.ts` (client + API).
-Saved under the local `data/` folder (gitignored).
+To list saved rows (needs `SUBMISSIONS_READ_TOKEN`):
+
+- `GET /api/newsletter?token=...`
+- `GET /api/consulting?token=...`
+
+Data is stored under `data/` (gitignored).
 
 ## SEO
 
-- `/sitemap.xml` and `/robots.txt` (set `NEXT_PUBLIC_SITE_URL` for production)
+- `/sitemap.xml` and `/robots.txt`
 
 ## Note
 
-Static files (fonts, images, videos) belong in `public/`. If that folder is empty, some images will look broken until you add them.
+Sandbox routes `/ali` and `/up` redirect home.
 
 ---
 
