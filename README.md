@@ -48,7 +48,12 @@ Newsletter and consulting forms post to:
 - `POST /api/newsletter` `{ "email": "..." }`
 - `POST /api/consulting` `{ "education", "name", "lastName", "phone", "description" }`
 
+Shared Zod schemas live in `src/lib/validation/forms.ts` (client + API).
 Saved under the local `data/` folder (gitignored).
+
+## SEO
+
+- `/sitemap.xml` and `/robots.txt` (set `NEXT_PUBLIC_SITE_URL` for production)
 
 ## Note
 
