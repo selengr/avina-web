@@ -51,10 +51,10 @@ export const SelectBox: React.FC<ISelectBoxProps & TErrorBehaviour> = ({
     option: (provided, state) => ({
       ...provided,
       backgroundColor: state.isSelected
-        ? 'rgba(0, 167, 111, 0.18)' // رنگ برای حالت انتخاب‌شده
+        ? 'rgba(0, 167, 111, 0.18)'
         : state.isFocused
-          ? 'rgba(0, 184, 217, 0.06)' // رنگ برای حالت فوکوس
-          : '', // رنگ پیش‌فرض
+          ? 'rgba(0, 184, 217, 0.06)'
+          : '',
       color: 'var(--color-primary-text)',
       fontWeight: state.isSelected ? '600' : '400',
       ':active': {
@@ -69,13 +69,12 @@ export const SelectBox: React.FC<ISelectBoxProps & TErrorBehaviour> = ({
       ...provided,
       color: 'var(--color-gray-600)',
     }),
-    // سایر استایل‌ها...
     ...customStyles,
   };
 
   const mergedComponents = {
-    IndicatorSeparator: () => null, // کامپوننت پیش‌فرض
-    ...components, // کامپوننت‌های ارسال‌شده از بیرون
+    IndicatorSeparator: () => null,
+    ...components,
   };
 
   return (

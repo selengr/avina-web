@@ -1,8 +1,8 @@
 # avina-web
 
-Company site for Avina (آوینا). Persian / RTL. I keep this repo as part of my portfolio work.
+Company site for Avina (آوینا). Persian / RTL. I keep this in my portfolio as a real Next.js project, not just a demo.
 
-Next.js app with home, about, services, portfolio, and contact. Forms save locally when no backend is set.
+It covers the usual company pages: home, about, services, portfolio, and contact. Newsletter + consulting forms work even without a backend — they just save JSON under `data/`.
 
 ## Stack
 
@@ -11,7 +11,7 @@ Next.js app with home, about, services, portfolio, and contact. Forms save local
 - Tailwind
 - Framer Motion / Swiper
 - React Query for client data
-- Zod for form validation helpers
+- Zod for form validation
 
 ## Setup
 
@@ -28,6 +28,13 @@ Open http://localhost:3000
 ```bash
 npm run build
 npm start
+```
+
+Handy checks:
+
+```bash
+npm run lint
+npm run typecheck
 ```
 
 ## Env
