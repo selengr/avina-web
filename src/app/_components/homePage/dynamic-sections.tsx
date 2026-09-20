@@ -42,9 +42,7 @@ export const AutoPlayVideo = dynamic(() => import('../common/video/video'), {
   ssr: false,
 });
 
-// export const NewsAndArticles = dynamic(() => import('./news-and-articles'), {
-//   ssr: false,
-// });
+// NewsAndArticles stays a server component — import it directly from home-page.
 
 export const SocialMedia = dynamic(
   () => import('../layouts/section/social-media'),
