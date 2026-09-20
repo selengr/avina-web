@@ -6,7 +6,7 @@ import Link from 'next/link';
 const ChatIcon: React.FC = () => {
   return (
     <Link
-      href="/#consulting"
+      href="/contact#consulting"
       aria-label="درخواست مشاوره"
       className="hidden lg:flex fixed right-12 bottom-10 z-[99999] transition-transform hover:scale-105"
     >

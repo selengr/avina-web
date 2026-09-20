@@ -14,11 +14,13 @@ import {
   APP_DEFAULT_TITLE,
   APP_DESCRIPTION,
   APP_TITLE_TEMPLATE,
+  SITE_URL,
 } from '../../config-global';
 
 // ----------------------------------------------------------------------
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     absolute: '',
     default: APP_DEFAULT_TITLE,
@@ -29,6 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: APP_DEFAULT_TITLE,
     description: APP_DESCRIPTION,
+    url: SITE_URL,
     locale: 'fa_IR',
     type: 'website',
   },
@@ -36,6 +39,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: APP_DEFAULT_TITLE,
     description: APP_DESCRIPTION,
+  },
+  alternates: {
+    canonical: SITE_URL,
   },
 };
 

@@ -5,14 +5,22 @@ import { useEffect, useState } from 'react';
 import FooterMedia from './footerMedia';
 import { IMenuProps } from '@/types/api/mobile-menu.types';
 import { getFooterMenuOptions } from './api/getFooterMenuOptions';
+import { fallbackNavMenus } from '../shared/fallback-nav-menus';
+
+const initialFooterMenus = fallbackNavMenus.filter((item) => item.link !== '/');
 
 const Footer: React.FC = () => {
-  const [menuLinksData, setMenuLinksData] = useState<IMenuProps[]>([]);
+  const [menuLinksData, setMenuLinksData] =
+    useState<IMenuProps[]>(initialFooterMenus);
 
   useEffect(() => {
     getFooterMenuOptions()
-      .then((menus) => setMenuLinksData(menus || []))
-      .catch(() => setMenuLinksData([]));
+      .then((menus) => {
+        if (menus?.length) setMenuLinksData(menus);
+      })
+      .catch(() => {
+        // Keep the static fallback menus.
+      });
   }, []);
 
   return (

@@ -59,6 +59,18 @@ const SearchData = () => {
     router.push(match?.href || resolveSearchHref(query));
   };
 
+  const handleSubmitQuery = (query: string) => {
+    const trimmed = query.trim();
+    if (!trimmed) {
+      toggleSearchModal();
+      router.push('/search');
+      return;
+    }
+    addToSearchHistory(trimmed);
+    toggleSearchModal();
+    router.push(resolveSearchHref(trimmed));
+  };
+
   const advancedHref = searchQuery.trim()
     ? `/search?q=${encodeURIComponent(searchQuery.trim())}`
     : '/search';
@@ -68,6 +80,7 @@ const SearchData = () => {
       <SearchDisplay
         isLoading={isLoading}
         onSearch={setSearchQuery}
+        onSubmitQuery={handleSubmitQuery}
         searchHistory={searchHistory}
         searchResults={searchResults}
         onClearSearchHistory={onClearSearchHistory}
