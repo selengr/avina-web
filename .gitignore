@@ -55,3 +55,6 @@ next-env.d.ts
 
 # form submissions saved by local API routes
 /data/
+
+# large local videos (keep offline if push times out)
+public/video/*.mp4

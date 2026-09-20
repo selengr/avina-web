@@ -1,6 +1,22 @@
 import { NextResponse } from 'next/server';
-import { saveNewsletterEmail } from '@/lib/submissions-store';
+import {
+  listNewsletterEmails,
+  saveNewsletterEmail,
+} from '@/lib/submissions-store';
+import { canReadSubmissions } from '@/lib/submissions-auth';
 import { firstZodMessage, newsletterSchema } from '@/lib/validation/forms';
+
+export async function GET(request: Request) {
+  if (!canReadSubmissions(request)) {
+    return NextResponse.json(
+      { success: false, message: 'Unauthorized' },
+      { status: 401 }
+    );
+  }
+
+  const data = await listNewsletterEmails();
+  return NextResponse.json({ success: true, data });
+}
 
 export async function POST(request: Request) {
   try {
