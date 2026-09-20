@@ -10,7 +10,7 @@ export default function NewsReadMoreButton() {
     <StylizedButton
       text="بیشتر بخوانید..."
       className="my-2 md:my-0 md:mt-4 py-2 min-w-52"
-      onClick={() => router.push('/about')}
+      onClick={() => router.push('/contact')}
     />
   );
 }

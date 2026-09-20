@@ -10,12 +10,14 @@ import {
   IconPlatform6,
 } from '@/app/_components/icons/icons';
 import Link from 'next/link';
+import { PATH_PAGE } from '../../../../../routes/paths';
 
 const platforms = [
   {
-    id: 'platform1',
+    id: 'portfolio',
     Icon: IconPlatform1,
-    link: 'https://platform1.com',
+    link: PATH_PAGE.portfolio.root,
+    label: 'نمونه کارها',
     props: {
       fill: '#637381',
       stroke: 'none',
@@ -25,9 +27,10 @@ const platforms = [
     },
   },
   {
-    id: 'platform2',
+    id: 'services',
     Icon: IconPlatform2,
-    link: 'https://platform2.com',
+    link: PATH_PAGE.services,
+    label: 'خدمات',
     props: {
       stroke: '#637381',
       fill: 'none',
@@ -37,9 +40,10 @@ const platforms = [
     },
   },
   {
-    id: 'platform3',
+    id: 'contact',
     Icon: IconPlatform3,
-    link: 'https://platform3.com',
+    link: PATH_PAGE.contact,
+    label: 'تماس',
     props: {
       stroke: '#637381',
       fill: 'none',
@@ -49,9 +53,10 @@ const platforms = [
     },
   },
   {
-    id: 'platform4',
+    id: 'about',
     Icon: IconPlatform4,
-    link: 'https://platform4.com',
+    link: PATH_PAGE.about,
+    label: 'درباره ما',
     props: {
       stroke: '#637381',
       fill: 'none',
@@ -61,9 +66,10 @@ const platforms = [
     },
   },
   {
-    id: 'platform5',
+    id: 'consulting',
     Icon: IconPlatform5,
-    link: 'https://platform5.com',
+    link: '/#consulting',
+    label: 'مشاوره',
     props: {
       stroke: '#637381',
       fill: 'none',
@@ -73,9 +79,10 @@ const platforms = [
     },
   },
   {
-    id: 'platform6',
+    id: 'search',
     Icon: IconPlatform6,
-    link: 'https://platform6.com',
+    link: PATH_PAGE.search,
+    label: 'جستجو',
     props: {
       fill: '#637381',
       stroke: 'none',
@@ -90,29 +97,28 @@ export default function PlatformLinks() {
   const [hoveredPlatform, setHoveredPlatform] = useState<string | null>(null);
 
   return (
-    <div className="flex flex-row justify-between items-center pr-10">
+    <div className="flex flex-row justify-between items-center pr-10 gap-4 flex-wrap">
       <span className="text-secondary font-[400] text-m-body2 md:font-kalameh md:text-d-body1">
-        مشاهده پروژه در سایر پلتفرم ها
+        ادامه مسیر در سایت
       </span>
       <div className="flex flex-row gap-2">
-        {/* {platforms.map(({ id, Icon, link, props }) => (
+        {platforms.map(({ id, Icon, link, label, props }) => (
           <Link
             key={id}
             href={link}
-            target="_blank"
-            rel="noopener noreferrer"
             className="p-1.5 rounded-full transition-all duration-200"
             onMouseEnter={() => setHoveredPlatform(id)}
             onMouseLeave={() => setHoveredPlatform(null)}
-            aria-label={`view on ${id}`}
+            aria-label={label}
+            title={label}
           >
             <Icon
               {...props}
-              stroke={hoveredPlatform === id ? "#2563EB" : props.stroke}
-              fill={hoveredPlatform === id ? "#2563EB" : props.fill}
+              stroke={hoveredPlatform === id ? '#2563EB' : props.stroke}
+              fill={hoveredPlatform === id ? '#2563EB' : props.fill}
             />
           </Link>
-        ))} */}
+        ))}
       </div>
     </div>
   );

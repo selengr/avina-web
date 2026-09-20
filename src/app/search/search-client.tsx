@@ -1,8 +1,8 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import {
   CatalogKind,
   catalogKindLabel,
@@ -22,10 +22,33 @@ const kindTabLabel: Record<CatalogKind | 'all', string> = {
   ...catalogKindLabel,
 };
 
+function isKind(value: string | null): value is CatalogKind | 'all' {
+  return (
+    value === 'all' ||
+    value === 'page' ||
+    value === 'service' ||
+    value === 'project'
+  );
+}
+
 export default function SearchClient() {
   const router = useRouter();
-  const [query, setQuery] = useState('');
-  const [kind, setKind] = useState<CatalogKind | 'all'>('all');
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams.get('q') || '';
+  const initialKind = searchParams.get('kind');
+
+  const [query, setQuery] = useState(initialQuery);
+  const [kind, setKind] = useState<CatalogKind | 'all'>(
+    isKind(initialKind) ? initialKind : 'all'
+  );
+
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (query.trim()) params.set('q', query.trim());
+    if (kind !== 'all') params.set('kind', kind);
+    const next = params.toString();
+    router.replace(next ? `/search?${next}` : '/search', { scroll: false });
+  }, [query, kind, router]);
 
   const results = useMemo(() => {
     if (!query.trim() && kind === 'all') {

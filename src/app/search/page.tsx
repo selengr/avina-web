@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import SearchClient from './search-client';
 
 export const metadata: Metadata = {
@@ -7,5 +8,15 @@ export const metadata: Metadata = {
 };
 
 export default function SearchPage() {
-  return <SearchClient />;
+  return (
+    <Suspense
+      fallback={
+        <main className="w-full py-14 px-4 text-center text-secondary">
+          در حال بارگذاری جستجو...
+        </main>
+      }
+    >
+      <SearchClient />
+    </Suspense>
+  );
 }

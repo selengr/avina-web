@@ -117,6 +117,8 @@ export const portfolioProjects = [
   },
 ] as const;
 
+export type PortfolioProject = (typeof portfolioProjects)[number];
+
 export const portfolioCategories = [
   'طراحی نرم افزار',
   'طراحی سایت',
@@ -125,6 +127,49 @@ export const portfolioCategories = [
   'شبکه و ارتباطات',
   'سایر',
 ] as const;
+
+const techByCategory: Record<string, string> = {
+  'طراحی نرم افزار': 'Next.js, Node.js, PostgreSQL',
+  'طراحی سایت': 'Next.js, Tailwind, Headless CMS',
+  'طراحی گرافیک': 'Figma, Illustrator, After Effects',
+  'امنیت اطلاعات': 'Nmap, OWASP, SIEM',
+  'شبکه و ارتباطات': 'Cisco, Linux, Prometheus',
+  سایر: 'Next.js, Python, Docker',
+};
+
+export function projectImageSrc(image: string) {
+  return image.startsWith('/') ? image : `/${image}`;
+}
+
+export function getPortfolioProject(slug: string) {
+  return portfolioProjects.find((project) => project.slug === slug);
+}
+
+export function getProjectInfoRows(project: PortfolioProject) {
+  return [
+    { label: 'عنوان پروژه:', value: project.title },
+    { label: 'زمینه فعالیت:', value: project.category },
+    {
+      label: 'تکنولوژی ها:',
+      value: techByCategory[project.category] || 'Next.js, TypeScript',
+    },
+    { label: 'سال اجرا:', value: '1403' },
+    { label: 'زبان:', value: 'فارسی' },
+    { label: 'کشور:', value: 'ایران' },
+  ];
+}
+
+export function getRelatedProjects(slug: string, limit = 6) {
+  const current = getPortfolioProject(slug);
+  const others = portfolioProjects.filter((project) => project.slug !== slug);
+  if (!current) return others.slice(0, limit);
+
+  const sameCategory = others.filter(
+    (project) => project.category === current.category
+  );
+  const rest = others.filter((project) => project.category !== current.category);
+  return [...sameCategory, ...rest].slice(0, limit);
+}
 
 export const siteCatalog: CatalogItem[] = [
   {
