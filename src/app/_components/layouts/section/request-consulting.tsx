@@ -1,34 +1,24 @@
 'use client';
 
 import Image from 'next/image';
-// import dynamic from 'next/dynamic';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import {
   Form,
-  Button,
   FormRow,
   Section,
   InputGroup,
   InputLabel,
   InputController,
   TextareaController,
-  // SelectBoxController,
   Description,
   Title,
 } from '../../common/field';
 
 import { IconPhone } from '../../icons/icons';
-import { VerticalImage } from '../../common/vertical-image/vertical-image';
-
-// const SelectBoxController = dynamic(
-//   () => import('../../common/field/select-box/select-box-controller'),
-//   { ssr: false }
-// );
 import SelectBoxController from '../../common/field/select-box/select-box-controller';
 import StylizedButton from '../../common/field/button/stylized-button';
-import httpService from '@/services/api/http-service';
-import { HOST_API_KEY } from '../../../../../config-global';
 
 type ConsultingFormValues = {
   education: string;
@@ -39,6 +29,10 @@ type ConsultingFormValues = {
 };
 
 const RequestConsulting = () => {
+  const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>(
+    'idle'
+  );
+  const [message, setMessage] = useState('');
   const { control, handleSubmit, reset } = useForm<ConsultingFormValues>({
     defaultValues: {
       education: '',
@@ -50,186 +44,179 @@ const RequestConsulting = () => {
   });
 
   const onSubmit = handleSubmit(async (values) => {
+    setStatus('loading');
+    setMessage('');
     try {
-      if (HOST_API_KEY) {
-        await httpService.post('/api/v1/public/consulting', values);
+      const response = await fetch('/api/consulting', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      });
+      const result = await response.json();
+      if (!response.ok || !result?.success) {
+        throw new Error(result?.message || 'error');
       }
-      window.alert(
-        `درخواست مشاوره برای ${values.name} ${values.lastName} ثبت شد.`
-      );
+      setStatus('done');
+      setMessage(result.message || 'درخواست شما ذخیره شد.');
       reset();
-    } catch {
-      window.alert('ارسال درخواست انجام نشد. لطفاً دوباره تلاش کنید.');
+    } catch (error) {
+      setStatus('error');
+      setMessage(
+        error instanceof Error && error.message !== 'error'
+          ? error.message
+          : 'ارسال درخواست انجام نشد. لطفاً دوباره تلاش کنید.'
+      );
     }
   });
 
   return (
     <Section
       id="consulting"
-      className="flex flex-col lg:flex-row lg:justify-center lg:items-center xs:pt-24 lg:pt-24 lg:pb-4 scroll-mt-24"
+      className="scroll-mt-24 pt-10 md:pt-16 lg:pt-20 pb-6 lg:pb-8 overflow-x-hidden"
     >
-      <div className="w-full lg:w-[50%] mb-6 lg:mb-0 lg:ml-20">
-        <div
-          className={`h-28 lg:h-40 w-[70%]  max-w-[600px] rounded-t-[2rem] p-4 pt-4 font-medium relative`}
-          style={{
-            backgroundColor: '#687BF2',
-            boxShadow: `0 1rem 0 #687BF2, 0 0 0 1rem transparent`,
-          }}
-        >
-          <div
-            className="absolute w-20 aspect-square -rotate-180 -left-8 -bottom-12"
-            style={{
-              background: ` radial-gradient(circle at 100% 100%, transparent 2rem, #687BF2 calc(1px + 2rem))`,
-              //   background: ` radial-gradient(circle at 100% 100%, transparent 4rem, ${backgroundColor} calc(4rem + 1px))`,
-            }}
-          ></div>
-
-          <div className=" absolute right-0 top-2 p-4 lg:p-6 z-50">
-            <Title className="lg:text-d-h2 text-m-h4 text-white">
+      <div className="flex flex-col lg:flex-row lg:items-stretch gap-6 lg:gap-10 w-full max-w-full">
+        {/* Intro panel — compact on mobile */}
+        <div className="w-full lg:w-[42%] shrink-0">
+          <div className="relative overflow-hidden rounded-[28px] bg-primary text-white p-5 sm:p-6 lg:p-8 min-h-[160px] lg:min-h-full">
+            <Title className="text-white text-m-h4 lg:text-d-h2 mb-2">
               مشاوره تخصصی
             </Title>
-            <Description className="text-white lg:pl-3">
-              جهت دریافت مشاوره تخصصی و رایگان اطلاعات و پروژه و شماره تماس خود
-              را ثبت کنید تا کارشناسان در اسرع وقت با شما تماس بگیرند.
+            <Description className="text-white/95 text-m-body2 lg:text-d-body1">
+              اطلاعات و شماره تماس‌تان را ثبت کنید تا کارشناس‌ها در اسرع وقت با
+              شما تماس بگیرند.
             </Description>
+
+            <Image
+              src="/robot/bot-think.svg"
+              height={180}
+              width={170}
+              alt=""
+              className="hidden sm:block absolute -left-2 bottom-0 w-[120px] lg:w-[180px] opacity-90 pointer-events-none"
+            />
           </div>
         </div>
-        <div
-          className={`h-[100px] relative text-white text-[1.25rem] leading-[1.8] pt-4 rounded-[2rem_0rem_2rem_2rem]`}
-          style={{ backgroundColor: '#687BF2' }}
+
+        {/* Form */}
+        <Form
+          onSubmit={onSubmit}
+          className="relative p-4 sm:p-6 lg:p-8 bg-white rounded-[28px] lg:rounded-[32px] w-full lg:flex-1 shadow-sm border border-divider/40 overflow-hidden"
         >
-          <Image
-            src={`/robot/bot-think.svg`}
-            height={226}
-            width={216}
-            alt="robot"
-            className="w-[186px] h-[176px] lg:w-[226px] lg:h-[216px] -mt-28 lg:-mt-40 absolute -left-2 lg:left-0 -top-[93px]"
-          />
+          <h3 className="text-primary-text text-m-h5 lg:text-d-h3 font-bold pb-5 lg:pb-8 lg:font-kalameh">
+            درخواست مشاوره
+          </h3>
 
-          <Image
-            src={`/images/arrow-left-long.svg`}
-            height={21}
-            width={37}
-            alt="robot"
-            className="w-[40px] absolute left-6 bottom-8"
-          />
-        </div>
+          <FormRow className="gap-4 md:gap-6">
+            <InputGroup>
+              <InputLabel name="education">سطح تحصیلات</InputLabel>
+              <SelectBoxController
+                id="education"
+                name="education"
+                control={control}
+                rules={{ required: 'سطح تحصیلات ضروری است' }}
+                placeholder="انتخاب نمایید"
+                options={[
+                  { label: 'دیپلم', value: 'diploma' },
+                  { label: 'کارشناسی', value: 'bachelor' },
+                  { label: 'کارشناسی ارشد', value: 'master' },
+                  { label: 'دکتری', value: 'phd' },
+                ]}
+                isLoading={false}
+                isSearchable={false}
+                isDisabled={false}
+              />
+            </InputGroup>
+          </FormRow>
+
+          <FormRow className="gap-4 md:gap-6">
+            <InputGroup>
+              <InputLabel name="name">نام</InputLabel>
+              <InputController
+                id="name"
+                name="name"
+                control={control}
+                rules={{ required: 'نام ضروری است' }}
+                placeholder="نام خود را وارد کنید"
+              />
+            </InputGroup>
+
+            <InputGroup>
+              <InputLabel name="lastName">نام خانوادگی</InputLabel>
+              <InputController
+                id="lastName"
+                name="lastName"
+                control={control}
+                rules={{ required: 'نام خانوادگی ضروری است' }}
+                placeholder="نام خانوادگی را وارد کنید"
+              />
+            </InputGroup>
+          </FormRow>
+
+          <FormRow className="gap-4 md:gap-6">
+            <InputGroup>
+              <InputLabel name="phone">شماره همراه</InputLabel>
+              <InputController
+                id="phone"
+                name="phone"
+                control={control}
+                rules={{
+                  required: 'شماره همراه ضروری است',
+                  pattern: {
+                    value: /^09\d{9}$/,
+                    message: 'شماره همراه معتبر نیست',
+                  },
+                }}
+                placeholder="0913..."
+                direction="ltr"
+                type="tel"
+                addonBefore={
+                  <IconPhone
+                    width="20"
+                    height="21"
+                    viewBox="0 0 20 21"
+                    fill="#212B36"
+                    stroke="none"
+                  />
+                }
+              />
+            </InputGroup>
+          </FormRow>
+
+          <FormRow className="gap-4 md:gap-6">
+            <InputGroup>
+              <InputLabel>توضیحات</InputLabel>
+              <TextareaController
+                id="description"
+                name="description"
+                control={control}
+                rules={{ required: 'توضیحات ضروری است' }}
+                placeholder="توضیحات را وارد کنید..."
+                rows={4}
+              />
+            </InputGroup>
+          </FormRow>
+
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 w-full pt-5">
+            {message ? (
+              <p
+                className={`text-m-body2 order-2 sm:order-1 ${
+                  status === 'error' ? 'text-error' : 'text-primary'
+                }`}
+              >
+                {message}
+              </p>
+            ) : (
+              <span className="order-2 sm:order-1" />
+            )}
+            <div className="order-1 sm:order-2 self-stretch sm:self-end flex justify-end">
+              <StylizedButton
+                text={status === 'loading' ? 'در حال ارسال...' : 'ثبت درخواست'}
+                className="my-0 py-2 min-w-44 max-w-full"
+                type="submit"
+              />
+            </div>
+          </div>
+        </Form>
       </div>
-
-      <Form
-        onSubmit={onSubmit}
-        className="relative p-4 xs:p-6 lg:p-8 bg-white rounded-[32px] lg:w-[50%] w-full "
-      >
-        <h3 className="text-primary-text text-m-h5 lg:text-d-h3 font-bold pb-6 lg:pb-10 lg:font-kalameh">
-          درخواست مشاوره
-        </h3>
-        <FormRow>
-          <InputGroup>
-            <InputLabel name="education">سطح تحصیلات</InputLabel>
-            <SelectBoxController
-              id="education"
-              name="education"
-              control={control}
-              rules={{ required: 'سطح تحصیلات ضروری است' }}
-              placeholder=" انتخاب نمایید"
-              options={[
-                { label: 'دیپلم', value: 'diploma' },
-                { label: 'کارشناسی', value: 'bachelor' },
-                { label: 'کارشناسی ارشد', value: 'master' },
-                { label: 'دکتری', value: 'phd' },
-              ]}
-              isLoading={false}
-              isSearchable={false}
-              isDisabled={false}
-            />
-          </InputGroup>
-        </FormRow>
-        <FormRow>
-          <InputGroup>
-            <InputLabel name="lastName">نام خانوادگی </InputLabel>
-            <InputController
-              id="lastName"
-              name="lastName"
-              control={control}
-              rules={{
-                required: 'نام خانوادگی   ضروری است',
-              }}
-              placeholder="نام خانوادگی  را وارد کنید"
-            />
-          </InputGroup>
-
-          <InputGroup>
-            <InputLabel name="name">نام </InputLabel>
-            <InputController
-              id="name"
-              name="name"
-              control={control}
-              rules={{
-                required: 'نام  ضروری است',
-              }}
-              placeholder="نام خود را وارد کنید"
-            />
-          </InputGroup>
-        </FormRow>
-
-        <FormRow>
-          <InputGroup>
-            <InputLabel name="phone">شماره همراه</InputLabel>
-            <InputController
-              id="phone"
-              name="phone"
-              control={control}
-              rules={{
-                required: 'شماره همراه  ضروری است',
-                pattern: {
-                  value: /^09\d{9}$/,
-                  message: 'شماره همراه معتبر نیست',
-                },
-              }}
-              placeholder="0913..."
-              direction="ltr"
-              type="tel"
-              addonBefore={
-                <IconPhone
-                  width="20"
-                  height="21"
-                  viewBox="0 0 20 21"
-                  fill="#212B36"
-                  stroke="none"
-                />
-              }
-            />
-          </InputGroup>
-        </FormRow>
-
-        <FormRow>
-          <InputGroup>
-            <InputLabel>توضیحات</InputLabel>
-            <TextareaController
-              id="description"
-              name="description"
-              control={control}
-              rules={{
-                required: 'توضیحات ضروری است',
-              }}
-              placeholder="توضیحات را وارد کنید..."
-              rows={5}
-            />
-          </InputGroup>
-        </FormRow>
-
-        <div className="flex justify-end w-full pt-7">
-          <StylizedButton
-            text={' ثبت درخواست'}
-            className="my-2 md:my-0 md:mt-4 py-2 min-w-52"
-            type="submit"
-          />
-        </div>
-        <VerticalImage
-          className="w-12 h-full bottom-0 -left-10"
-          src="consulting"
-        />
-      </Form>
     </Section>
   );
 };
