@@ -1,16 +1,12 @@
 'use client';
 
-// import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import React from 'react';
 import { cn } from '@/lib/utils';
-// import Media from '../../common/media/media';
 import Title from '../../common/field/title';
 import Wrapper from '../../common/field/wrapper';
 import Description from '../../common/field/description';
 import Section from '../../common/field/section';
-
-// const Media = dynamic(() => import('../../common/media/media'), { ssr: false });
 import Media from '../../common/media/media';
 import AutoPlayVideo from '../../common/video/video';
 

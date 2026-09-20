@@ -1,5 +1,6 @@
 import { promises as fs } from 'fs';
 import path from 'path';
+import { randomUUID } from 'crypto';
 
 const DATA_DIR = path.join(process.cwd(), 'data');
 
@@ -23,6 +24,10 @@ async function writeJsonArray<T>(fileName: string, rows: T[]) {
   await ensureDataDir();
   const filePath = path.join(DATA_DIR, fileName);
   await fs.writeFile(filePath, JSON.stringify(rows, null, 2), 'utf8');
+}
+
+function newEntryId() {
+  return randomUUID();
 }
 
 export type NewsletterEntry = {
@@ -50,7 +55,7 @@ export async function saveNewsletterEmail(email: string): Promise<NewsletterEntr
   }
 
   const entry: NewsletterEntry = {
-    id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    id: newEntryId(),
     email: normalized,
     createdAt: new Date().toISOString(),
   };
@@ -64,7 +69,7 @@ export async function saveConsultingRequest(
 ): Promise<ConsultingEntry> {
   const rows = await readJsonArray<ConsultingEntry>('consulting.json');
   const entry: ConsultingEntry = {
-    id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    id: newEntryId(),
     ...payload,
     createdAt: new Date().toISOString(),
   };
