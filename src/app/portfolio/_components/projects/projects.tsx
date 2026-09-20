@@ -1,159 +1,111 @@
 'use client';
-import React, { useState } from 'react';
+
+import React, { useMemo, useState } from 'react';
 import { Section } from '@/app/_components/common/field';
 import Image from 'next/image';
 import ProjectsList from '../projects-list/projects-list';
-
-const items = [
-  {
-    id: 1,
-    image: 'images/card1.svg',
-    title: 'سیستم مدیریت مشتریان',
-    category: 'طراحی نرم افزار',
-  },
-  {
-    id: 2,
-    image: 'images/card2.svg',
-    title: 'طراحی فروشگاه آنلاین',
-    category: 'طراحی سایت',
-  },
-  {
-    id: 3,
-    image: 'images/card3.svg',
-    title: 'طراحی لوگو برند ایکس',
-    category: 'طراحی گرافیک',
-  },
-  {
-    id: 4,
-    image: 'images/card1.svg',
-    title: 'بررسی و تست امنیت شبکه',
-    category: 'امنیت اطلاعات',
-  },
-  {
-    id: 5,
-    image: 'images/card2.svg',
-    title: 'راه‌اندازی سرورهای ابری',
-    category: 'شبکه و ارتباطات',
-  },
-  {
-    id: 6,
-    image: 'images/card3.svg',
-    title: 'اپلیکیشن مدیریت پروژه',
-    category: 'طراحی نرم افزار',
-  },
-  {
-    id: 7,
-    image: 'images/card1.svg',
-    title: 'طراحی رابط کاربری اپ موبایل',
-    category: 'طراحی گرافیک',
-  },
-  {
-    id: 8,
-    image: 'images/card2.svg',
-    title: 'ایمن‌سازی داده‌های شرکتی',
-    category: 'امنیت اطلاعات',
-  },
-  {
-    id: 9,
-    image: 'images/card3.svg',
-    title: 'پروژه تحقیقاتی هوش مصنوعی',
-    category: 'سایر',
-  },
-  {
-    id: 9,
-    image: 'images/card3.svg',
-    title: 'پروژه تحقیقاتی هوش مصنوعی',
-    category: 'سایر',
-  },
-  {
-    id: 9,
-    image: 'images/card3.svg',
-    title: 'پروژه تحقیقاتی هوش مصنوعی',
-    category: 'سایر',
-  },
-  {
-    id: 9,
-    image: 'images/card3.svg',
-    title: 'پروژه تحقیقاتی هوش مصنوعی',
-    category: 'سایر',
-  },
-  {
-    id: 9,
-    image: 'images/card3.svg',
-    title: 'پروژه تحقیقاتی هوش مصنوعی',
-    category: 'سایر',
-  },
-  {
-    id: 9,
-    image: 'images/card3.svg',
-    title: 'پروژه تحقیقاتی هوش مصنوعی',
-    category: 'سایر',
-  },
-];
-
-const categories = [
-  'طراحی نرم افزار',
-  'طراحی سایت',
-  'طراحی گرافیک',
-  'امنیت اطلاعات',
-  'شبکه و ارتباطات',
-  'سایر',
-];
+import {
+  portfolioCategories,
+  portfolioProjects,
+} from '@/constans/site-catalog';
+import { IconSearch } from '@/app/_components/icons/icons';
 
 function Projects() {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>('همه');
+  const [query, setQuery] = useState('');
 
-  const toggleCategory = (cat?: string) => {
-    if (!cat) return;
-    setSelectedCategories((prev) =>
-      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
-    );
-  };
-
-  const filteredItems =
-    selectedCategories.length === 0
-      ? items
-      : items.filter(
-          (item) =>
-            item.category &&
-            selectedCategories.includes(item.category as string)
-        );
+  const filteredItems = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return portfolioProjects.filter((item) => {
+      const categoryOk =
+        selectedCategory === 'همه' || item.category === selectedCategory;
+      if (!categoryOk) return false;
+      if (!q) return true;
+      return (
+        item.title.toLowerCase().includes(q) ||
+        item.category.toLowerCase().includes(q) ||
+        item.description.toLowerCase().includes(q)
+      );
+    });
+  }, [selectedCategory, query]);
 
   return (
     <Section>
-      <div className="mb-4 flex items-center w-full">
+      <div className="mb-4 flex flex-col lg:flex-row lg:items-center gap-4 w-full">
         <div className="flex flex-wrap gap-2">
-          {categories.map((cat) => (
+          <button
+            type="button"
+            onClick={() => setSelectedCategory('همه')}
+            className={`relative border rounded-full px-4 py-1 transition-colors text-m-body2 ${
+              selectedCategory === 'همه'
+                ? 'bg-primary text-white border-primary'
+                : 'border-secondary text-secondary hover:bg-gray-200'
+            }`}
+          >
+            همه
+          </button>
+          {portfolioCategories.map((cat) => (
             <button
               key={cat}
-              onClick={() => toggleCategory(cat)}
-              className={`relative border rounded-full px-4 py-1 transition-colors ${
-                selectedCategories.includes(cat)
-                  ? 'bg-white text-primary-text font-semibold border-white pl-6'
+              type="button"
+              onClick={() => setSelectedCategory(cat)}
+              className={`relative border rounded-full px-4 py-1 transition-colors text-m-body2 ${
+                selectedCategory === cat
+                  ? 'bg-white text-primary-text font-semibold border-primary pl-6'
                   : 'border-secondary text-secondary hover:bg-gray-200'
               }`}
             >
               {cat}
-              {selectedCategories.includes(cat) && (
-                <div className="absolute left-5 top-[14px] h-1 w-2 rounded-full">
-                  <div className="bg-primary-text h-1 w-1 mx-[14px] rounded-full"></div>
-                </div>
+              {selectedCategory === cat && (
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-primary-text" />
               )}
             </button>
           ))}
         </div>
 
-        <div className="hidden lg:flex flex-grow mx-4 h-[1px] bg-divider"></div>
+        <div className="hidden lg:flex flex-grow mx-2 h-[1px] bg-divider" />
+
+        <label className="flex items-center gap-2 rounded-full border border-divider bg-white px-3 py-1.5 w-full lg:w-64 shrink-0">
+          <IconSearch className="stroke-secondary w-4 h-4" />
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="جستجو در پروژه‌ها..."
+            className="w-full bg-transparent outline-none text-m-body2 text-primary-text"
+          />
+        </label>
 
         <Image
           width={240}
           height={100}
           src="/images/Projects-2.svg"
-          alt="project icon"
-          className="hidden lg:flex"
+          alt=""
+          className="hidden xl:flex"
         />
       </div>
-      <ProjectsList filteredItems={filteredItems} />
+
+      <p className="text-disabled-text text-m-caption mb-4">
+        {filteredItems.length} پروژه
+        {selectedCategory !== 'همه' ? ` در «${selectedCategory}»` : ''}
+      </p>
+
+      {filteredItems.length > 0 ? (
+        <ProjectsList filteredItems={[...filteredItems]} />
+      ) : (
+        <div className="rounded-2xl border border-dashed border-divider p-10 text-center text-secondary">
+          پروژه‌ای با این فیلتر پیدا نشد.
+          <button
+            type="button"
+            className="block mx-auto mt-3 text-primary underline"
+            onClick={() => {
+              setSelectedCategory('همه');
+              setQuery('');
+            }}
+          >
+            پاک کردن فیلتر
+          </button>
+        </div>
+      )}
     </Section>
   );
 }
