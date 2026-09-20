@@ -7,15 +7,6 @@ interface ProjectInfoItemProps {
   value: string;
 }
 
-const projectInfo = [
-  { label: 'عنوان سایت:', value: 'خودروسازی شرکت بنتلی...' },
-  { label: 'زمینه فعالیت:', value: 'گروه خودروسازی و تولیدی بنتلی' },
-  { label: 'تکنولوژی ها:', value: 'PHP, HTML, CSS, JS, MY SQL' },
-  { label: 'سال اجرا:', value: '1403' },
-  { label: 'زبان:', value: 'فارسی ، انگلیسی، عربی' },
-  { label: 'کشور:', value: 'انگلستان' },
-];
-
 function ProjectInfoItem({ label, value }: ProjectInfoItemProps) {
   return (
     <div className="flex flex-col">
@@ -29,7 +20,11 @@ function ProjectInfoItem({ label, value }: ProjectInfoItemProps) {
   );
 }
 
-export default function ProjectInfo() {
+export default function ProjectInfo({
+  rows,
+}: {
+  rows: Array<{ label: string; value: string }>;
+}) {
   return (
     <EdgeSection
       className="mt-20"
@@ -39,7 +34,7 @@ export default function ProjectInfo() {
       isLtr={true}
     >
       <div className="space-y-4 pt-12 pr-10">
-        {projectInfo.map((item, index) => (
+        {rows.map((item, index) => (
           <ProjectInfoItem
             key={`project-info-${index}`}
             label={item.label}

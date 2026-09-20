@@ -22,6 +22,7 @@ const SearchData = () => {
   useEffect(() => {
     if (searchQuery.trim() === '') {
       setSearchResults([]);
+      setIsLoading(false);
       return;
     }
 
@@ -43,8 +44,14 @@ const SearchData = () => {
     toggleSearchModal();
     if (match?.href) {
       router.push(match.href);
+    } else {
+      router.push(`/search?q=${encodeURIComponent(query.trim())}`);
     }
   };
+
+  const advancedHref = searchQuery.trim()
+    ? `/search?q=${encodeURIComponent(searchQuery.trim())}`
+    : '/search';
 
   return (
     <div>
@@ -58,7 +65,7 @@ const SearchData = () => {
       />
       <div className="px-10 pb-6">
         <Link
-          href="/search"
+          href={advancedHref}
           onClick={() => toggleSearchModal()}
           className="text-primary text-m-body2 underline"
         >

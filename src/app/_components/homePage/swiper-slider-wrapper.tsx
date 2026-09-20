@@ -13,13 +13,13 @@ const defaultCards: ICardSwiperSlider[] = [
     id: 1,
     title: 'خبر جدید در مورد صادرات و واردات محصولات',
     image: 'images/news-card1.svg',
-    link: '/about',
+    link: '/services',
   },
   {
     id: 2,
     title: 'تحول دیجیتال در کسب‌وکارهای ایرانی',
     image: 'images/news-card3.svg',
-    link: '/about',
+    link: '/services',
   },
   {
     id: 3,
@@ -46,7 +46,7 @@ function mapNewsToCards(newsCard: TNewsAndArticlesData[]): ICardSwiperSlider[] {
     id: article.id,
     title: article.title,
     image: article.thumbnail?.preview_link || article.thumbnail?.path || '',
-    link: '/about',
+    link: '/contact',
     date: article.published_at,
     summary: article.headline || undefined,
   }));

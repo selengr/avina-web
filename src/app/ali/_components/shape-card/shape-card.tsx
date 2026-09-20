@@ -1,10 +1,14 @@
+'use client';
+
 import Image from 'next/image';
 import React from 'react';
-import CraftedButton from '../crafted-button/crafted-button';
+import { useRouter } from 'next/navigation';
 import { Section } from '@/app/_components/common/field';
 import StylizedButton from '@/app/_components/common/field/button/stylized-button';
 
 const ShapeCard = () => {
+  const router = useRouter();
+
   return (
     <Section>
       <div className="relative w-full h-auto">
@@ -50,7 +54,7 @@ const ShapeCard = () => {
               <StylizedButton
                 className="py-7 px-[6px]  min-w-52"
                 text={' درخواست همکاری'}
-                // onClick={() => push(`/portfolio/${title}`)}
+                onClick={() => router.push('/contact')}
               />{' '}
             </div>
           </div>
@@ -58,7 +62,7 @@ const ShapeCard = () => {
         <div className="absolute -top-5 left-0 xl:-top-10 xl:left-2 ">
           <Image
             src="/images/pocket2.svg"
-            alt="svg"
+            alt="همکاری با آوینا"
             width={246}
             height={248}
             className="w-[80px] h-[80px] md:w-[100px] md:h-[100px] lg:w-[150px] lg:h-[150px] xl:w-full xl:h-full 2xl:w-[200px] 2xl:h-[200px]"

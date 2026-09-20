@@ -9,7 +9,8 @@ interface BannerV3Props {
   description: string;
   bgImage1: string;
   bgImage2: string;
-  botImage: string;
+  imageSrc: string;
+  imageAlt?: string;
   customClasses?: {
     bgImage1?: string;
     bgImage2?: string;
@@ -23,7 +24,8 @@ const BannerV3: React.FC<BannerV3Props> = ({
   description,
   bgImage1,
   bgImage2,
-  botImage,
+  imageSrc,
+  imageAlt = '',
   customClasses = {
     bgImage1: '',
     bgImage2: '',
@@ -53,16 +55,14 @@ const BannerV3: React.FC<BannerV3Props> = ({
         ></div>
       </div>
 
-      <div className="flex lg:hidden flex-col absolute top-4 right-4">
+      <div className="flex lg:hidden flex-col absolute top-4 right-4 left-4 z-10">
         <h3 className="font-[300] text-primary-text font-kalameh text-m-h3">
           {title}
         </h3>
         <h6 className="font-semibold text-secondary font-kalameh text-m-body1">
           {subtitle}
         </h6>
-        <span className="lg:text-secondary text-m-body2 pt-2">
-          {description}
-        </span>
+        <span className="lg:text-secondary text-m-body2 pt-2">{description}</span>
       </div>
       <div
         className={cn(
@@ -95,13 +95,14 @@ const BannerV3: React.FC<BannerV3Props> = ({
         </span>
       </div>
 
-      <div className="lg:w-[629px] rounded-3xl px-4 lg:px-0 lg:rounded-[32px] absolute -bottom-16 lg:left-[52px] lg:border-[3px] border-white">
+      <div className="lg:w-[629px] rounded-3xl px-4 lg:px-0 lg:rounded-[32px] absolute -bottom-16 lg:left-[52px] lg:border-[3px] border-white overflow-hidden">
         <Image
-          src={`/images/${botImage}.svg`}
-          alt={botImage}
-          width={66}
-          height={106}
-          className=" object-cover w-full"
+          src={imageSrc}
+          alt={imageAlt || subtitle}
+          width={629}
+          height={472}
+          className="object-cover w-full h-auto"
+          priority
         />
       </div>
     </div>

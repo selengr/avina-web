@@ -12,116 +12,77 @@ import {
 } from '../../common/carousel/carousel';
 import Title from '../../common/field/title';
 import { IconCardArrow } from '../../icons/icons';
-
-const projects = [
-  {
-    id: 1,
-    title: 'طراحی داشبورد سازمانی',
-    image: 'images/card1.svg',
-    link: '/portfolio/crm',
-  },
-  {
-    id: 2,
-    title: 'پرتال خدمات مشتریان',
-    image: 'images/card3.svg',
-    link: '/portfolio/intranet',
-  },
-  {
-    id: 3,
-    title: 'سامانه مدیریت پروژه',
-    image: 'images/card2.svg',
-    link: '/portfolio/pm-app',
-  },
-  {
-    id: 4,
-    title: 'اپلیکیشن موبایل فروش',
-    image: 'images/card1.svg',
-    link: '/portfolio/mobile-ui',
-  },
-  {
-    id: 5,
-    title: 'فروشگاه آنلاین',
-    image: 'images/card2.svg',
-    link: '/portfolio/shop',
-  },
-  {
-    id: 6,
-    title: 'اتوماسیون اداری',
-    image: 'images/card3.svg',
-    link: '/portfolio/automation',
-  },
-];
+import {
+  portfolioProjects,
+  projectImageSrc,
+} from '@/constans/site-catalog';
+import { PATH_PAGE } from '../../../../../routes/paths';
 
 export default function SliderCard() {
+  const projects = portfolioProjects.slice(0, 6);
+
   return (
-    <div className="w-full py-10 md:py-14 md:px-4 lg:px-8 2xl:px-48">
-      <Carousel
-        opts={{
-          align: 'start',
-          loop: true,
-          direction: 'rtl',
-          skipSnaps: false,
-        }}
-        className="w-full px-4 md:px-0"
-      >
-        <div className="mb-5 md:mb-8 flex items-center justify-between gap-4">
-          <Title className="mb-0 text-m-h5 md:text-inherit">
-            نمونه کارهای آوینا
-          </Title>
-          <div className="hidden sm:flex items-center gap-2">
-            <CarouselPrevious />
-            <CarouselNext />
-          </div>
+    <div className="w-full bg-gray-50 py-12 md:px-4 lg:px-8 2xl:px-48">
+      <div className="container mx-auto px-4">
+        <div className="mb-6 md:mb-8 flex items-center justify-between gap-4">
+          <Title className="mb-0">نمونه کارهای آوینا</Title>
+          <Link
+            href={PATH_PAGE.portfolio.root}
+            className="text-primary text-m-body2 underline shrink-0"
+          >
+            همه پروژه‌ها
+          </Link>
         </div>
 
-        <CarouselContent className="-mr-3 md:-mr-4">
-          {projects.map((project) => (
-            <CarouselItem
-              key={project.id}
-              className="pr-3 md:pr-4 basis-[82%] xs:basis-[70%] sm:basis-[55%] md:basis-1/2 lg:basis-1/3"
-            >
-              <Link
-                href={project.link}
-                className="block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-3xl"
+        <Carousel
+          opts={{
+            align: 'start',
+            loop: true,
+            direction: 'rtl',
+          }}
+          className="w-full relative"
+        >
+          <CarouselContent className="-ml-2 md:-ml-4">
+            {projects.map((project) => (
+              <CarouselItem
+                key={project.id}
+                className="pl-2 basis-[85%] xs:basis-[70%] md:basis-1/2 lg:basis-1/3 md:pl-4"
               >
-                <Card className="group relative h-full overflow-hidden rounded-3xl border-none shadow-sm transition-all duration-300 hover:shadow-lg bg-white">
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <Image
-                      src={`/${project.image}`}
-                      alt={project.title}
-                      width={400}
-                      height={300}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent" />
-
-                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
-                    <p className="text-sm md:text-base text-white font-medium line-clamp-1">
-                      {project.title}
-                    </p>
-                    <div className="rounded-full bg-white/95 p-2 shadow-md transition-transform duration-300 group-hover:-translate-x-1 shrink-0">
-                      <IconCardArrow
-                        width="20"
-                        height="20"
-                        viewBox="0 0 36 36"
-                        fill="#687BF2"
-                        stroke="fill"
+                <Link
+                  href={PATH_PAGE.portfolio.design(project.slug)}
+                  className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-2xl"
+                >
+                  <Card className="group relative overflow-hidden rounded-3xl border-none shadow-sm transition-all duration-300 hover:shadow-lg">
+                    <div className="aspect-[4/3] overflow-hidden">
+                      <Image
+                        src={projectImageSrc(project.image)}
+                        alt={project.title}
+                        width={400}
+                        height={300}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
-                  </div>
-                </Card>
-              </Link>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
 
-        <div className="mt-5 flex sm:hidden items-center justify-center gap-3">
-          <CarouselPrevious />
-          <CarouselNext />
-        </div>
-      </Carousel>
+                    <div className="flex items-center justify-between gap-3 p-4">
+                      <div>
+                        <p className="text-m-caption text-primary mb-1">
+                          {project.category}
+                        </p>
+                        <h3 className="text-m-subtitle1 font-semibold text-primary-text line-clamp-2">
+                          {project.title}
+                        </h3>
+                      </div>
+                      <IconCardArrow className="stroke-primary shrink-0 transition-transform group-hover:-translate-x-1" />
+                    </div>
+                  </Card>
+                </Link>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden md:flex" />
+          <CarouselNext className="hidden md:flex" />
+        </Carousel>
+      </div>
     </div>
   );
 }

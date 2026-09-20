@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Form, InputController } from '../../field';
 import { useForm } from 'react-hook-form';
 import Divider from '../../field/divider';
@@ -57,7 +57,9 @@ const SearchDisplay: React.FC<ISearchDisplayProps> = ({
       </Form>
       <Divider />
       {isLoading ? (
-        <div>loading ... </div>
+        <div className="px-10 py-6 text-secondary text-m-body2">
+          در حال جستجو...
+        </div>
       ) : (
         <div className="px-10">
           {searchQuery && (
@@ -91,11 +93,15 @@ const SearchDisplay: React.FC<ISearchDisplayProps> = ({
               searchHistory={searchHistory}
               onResultClick={onResultClick}
             />
-          ) : (
+          ) : searchResults?.length ? (
             <SearchResult
               searchResult={searchResults}
               onResultClick={onResultClick}
             />
+          ) : (
+            <p className="text-secondary text-m-body2 py-4">
+              نتیجه‌ای پیدا نشد. عبارت دیگری را امتحان کنید.
+            </p>
           )}
         </div>
       )}
