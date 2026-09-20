@@ -36,7 +36,7 @@ export const Card = React.memo(
       onMouseEnter={() => setHovered(index)}
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        'rounded-2xl relative overflow-hidden h-44 xs:h-60 md:h-[364px] lg:h-[514px] w-full transition-all duration-300 ease-out',
+        'group rounded-2xl relative overflow-hidden h-44 xs:h-60 md:h-[364px] lg:h-[514px] w-full transition-all duration-300 ease-out',
         className
       )}
     >
@@ -54,26 +54,29 @@ export const Card = React.memo(
       )}
 
       <Image
-        src={`/images/${src}` || '/placeholder.svg'}
+        src={`/images/${src}`}
         alt={title}
         fill
-        className="object-cover absolute inset-0"
+        className={cn(
+          'object-cover absolute inset-0 transition-transform duration-500',
+          hovered === index && 'scale-105'
+        )}
       />
 
-      <div className="absolute top-4 right-4 md:top-6 md:right-8 md:left-3">
-        <div className="text-d-h6 text-white font-bold md:text-d-h4 lg:text-d-h3  mb-2 md:mb-1 md:font-kalameh md:font-medium">
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+
+      <div className="absolute top-4 right-4 left-4 md:top-6 md:right-8 md:left-3 z-10">
+        <div className="text-d-h6 text-white font-bold md:text-d-h4 lg:text-d-h3 mb-2 md:mb-1 md:font-kalameh md:font-medium">
           {title}
         </div>
         {hovered !== index && (
-          <span className="text-m-body1 text-white md:text-d-h5 lg:text-d-h4 md:font-museo-moderno md:font-thin">
+          <span className="text-m-body1 text-white/90 md:text-d-h5 lg:text-d-h4 md:font-museo-moderno md:font-thin">
             {enName}
           </span>
         )}
         {hovered === index && (
-          <span className="text-m-caption text-white md:text-d-body1">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-            استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در
-            ستون و سطرآنچنان که لازم است.
+          <span className="text-m-caption text-white md:text-d-body1 block max-w-[90%]">
+            جزئیات بیشتر این خدمت را در صفحه خدمات ببینید.
           </span>
         )}
       </div>
@@ -81,9 +84,10 @@ export const Card = React.memo(
       <Link
         href={`${PATH_PAGE.services}#${serviceId}`}
         className="z-50"
+        aria-label={title}
       >
         <IconCardArrow
-          className="absolute bottom-5 left-4 z-50"
+          className="absolute bottom-5 left-4 z-50 transition-transform duration-300 group-hover:-translate-x-1"
           fill="white"
           stroke="fill"
           width="36"
@@ -91,18 +95,6 @@ export const Card = React.memo(
           viewBox="0 0 36 36"
         />
       </Link>
-
-      <div
-        className={
-          cn()
-          //   "absolute inset-0 bg-black/50 flex items-end py-8 px-4 transition-opacity duration-300",
-          //   hovered === index ? "opacity-100" : "opacity-0"
-        }
-      >
-        <div className="text-xl text-white md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200">
-          {title}
-        </div>
-      </div>
     </div>
   )
 );
@@ -155,9 +147,8 @@ function ServiceCards({ cards }: { cards: Card[] }) {
       <Wrapper className="md:w-[80%] lg:w-[50%]">
         <Title>خدمات آوینا</Title>
         <Description>
-          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-          از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
-          سطرآنچنان که لازم است.
+          از نرم‌افزار و سخت‌افزار تا شبکه، امنیت و آموزش — خدمات آوینا برای
+          رشد کسب‌وکار شما کنار هم چیده شده.
         </Description>
       </Wrapper>
 

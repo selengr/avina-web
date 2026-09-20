@@ -1,17 +1,35 @@
 .swiperContainer {
-  padding-bottom: 20px;
+  padding-bottom: 36px;
+  overflow: visible;
+}
+
+.swiperContainer :global(.swiper-pagination) {
+  bottom: 0 !important;
+}
+
+.swiperContainer :global(.swiper-pagination-bullet) {
+  width: 8px;
+  height: 8px;
+  background: #c4cdd5;
+  opacity: 1;
+}
+
+.swiperContainer :global(.swiper-pagination-bullet-active) {
+  background: #687bf2;
+  width: 18px;
+  border-radius: 9999px;
 }
 
 .swiperScrollbar {
-  height: 3px !important;
-  background-color: rgba(200, 200, 200, 0.3) !important;
+  height: 4px !important;
+  background-color: rgba(104, 123, 242, 0.18) !important;
   border-radius: 9999px !important;
-  width: 200px !important;
+  width: min(220px, 60%) !important;
 }
 
 .swiperScrollbar :global(.swiper-scrollbar-drag) {
   height: 100% !important;
-  background-color: rgba(0, 0, 0, 0.6) !important;
+  background-color: #687bf2 !important;
   border-radius: 9999px !important;
-  cursor: pointer !important;
+  cursor: grab !important;
 }

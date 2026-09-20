@@ -198,4 +198,65 @@ const CarouselItem = React.forwardRef<
 });
 CarouselItem.displayName = 'CarouselItem';
 
-export { type CarouselApi, Carousel, CarouselContent, CarouselItem };
+const CarouselPrevious = React.forwardRef<
+  HTMLButtonElement,
+  React.ButtonHTMLAttributes<HTMLButtonElement>
+>(({ className, ...props }, ref) => {
+  const { scrollPrev, canScrollPrev } = useCarousel();
+
+  return (
+    <button
+      ref={ref}
+      type="button"
+      disabled={!canScrollPrev}
+      onClick={scrollPrev}
+      aria-label="اسلاید قبلی"
+      className={cn(
+        'h-10 w-10 rounded-full bg-white shadow-md text-secondary hover:text-primary disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center transition-colors',
+        className
+      )}
+      {...props}
+    >
+      <span className="text-lg leading-none" aria-hidden>
+        ›
+      </span>
+    </button>
+  );
+});
+CarouselPrevious.displayName = 'CarouselPrevious';
+
+const CarouselNext = React.forwardRef<
+  HTMLButtonElement,
+  React.ButtonHTMLAttributes<HTMLButtonElement>
+>(({ className, ...props }, ref) => {
+  const { scrollNext, canScrollNext } = useCarousel();
+
+  return (
+    <button
+      ref={ref}
+      type="button"
+      disabled={!canScrollNext}
+      onClick={scrollNext}
+      aria-label="اسلاید بعدی"
+      className={cn(
+        'h-10 w-10 rounded-full bg-white shadow-md text-secondary hover:text-primary disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center transition-colors',
+        className
+      )}
+      {...props}
+    >
+      <span className="text-lg leading-none" aria-hidden>
+        ‹
+      </span>
+    </button>
+  );
+});
+CarouselNext.displayName = 'CarouselNext';
+
+export {
+  type CarouselApi,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+};

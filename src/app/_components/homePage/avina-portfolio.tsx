@@ -4,51 +4,51 @@ import SwiperSlider from '../common/swiper-slider/SwiperSlider';
 import { ICardSwiperSlider } from '../common/swiper-slider/type';
 import ProjectItems from '@/app/portfolio/_components/projects-items/project-items';
 
-const defaultCards = [
+const defaultCards: ICardSwiperSlider[] = [
   {
     id: 1,
-    title: 'card1',
+    title: 'داشبورد سازمانی',
     image: 'images/card1.svg',
-    link: '#',
+    link: '/portfolio',
   },
   {
     id: 2,
-    title: 'card3',
+    title: 'پرتال مشتریان',
     image: 'images/card3.svg',
-    link: '#',
+    link: '/portfolio',
   },
   {
     id: 3,
-    title: 'card2',
+    title: 'مدیریت پروژه',
     image: 'images/card2.svg',
-    link: '#',
+    link: '/portfolio',
   },
   {
     id: 4,
-    title: 'card1',
+    title: 'فروش آنلاین',
     image: 'images/card1.svg',
-    link: '#',
+    link: '/portfolio',
   },
   {
     id: 5,
-    title: 'card3',
+    title: 'اپ موبایل',
     image: 'images/card3.svg',
-    link: '#',
+    link: '/portfolio',
   },
   {
     id: 6,
-    title: 'card2',
+    title: 'اتوماسیون اداری',
     image: 'images/card2.svg',
-    link: '#',
+    link: '/portfolio',
   },
 ];
 
 const renderSlide = (project: ICardSwiperSlider) => {
   return (
     <ProjectItems
-      id={project?.id}
-      image={project?.image}
-      title={project?.title}
+      id={project.id}
+      image={project.image}
+      title={project.title}
     />
   );
 };
