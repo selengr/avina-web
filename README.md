@@ -10,7 +10,7 @@ I use this as a real project in my portfolio. It's Persian / RTL and built with 
 - Consulting request form
 - News section (falls back to sample cards if the API is offline)
 - Shared header / footer layout
-- Fonts, images, and videos under `public/`
+- Fonts, images, logos under `public/` (mp4 videos stay local — see `.gitignore`)
 
 ## Stack
 
