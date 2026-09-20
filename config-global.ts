@@ -4,6 +4,9 @@ export const APP_TITLE_TEMPLATE = '%s | آوینا';
 export const APP_DESCRIPTION =
   'وب‌سایت شرکت آوینا — خدمات نرم‌افزار، سخت‌افزار، شبکه و پشتیبانی';
 
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
 // API
 // ----------------------------------------------------------------------
 

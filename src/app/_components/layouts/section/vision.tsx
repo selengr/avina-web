@@ -5,7 +5,6 @@ import Wrapper from '../../common/field/wrapper';
 import Section from '../../common/field/section';
 import Description from '../../common/field/description';
 import { VerticalImage } from '../../common/vertical-image/vertical-image';
-import CraftedButton from '@/app/ali/_components/crafted-button/crafted-button';
 import StylizedButton from '../../common/field/button/stylized-button';
 
 export default function FeatureSection() {

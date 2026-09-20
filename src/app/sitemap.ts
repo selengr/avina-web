@@ -1,9 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { PATH_PAGE } from '../../routes/paths';
 import { portfolioProjects, siteCatalog } from '@/constans/site-catalog';
-
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+import { SITE_URL } from '../../config-global';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

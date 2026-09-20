@@ -16,12 +16,13 @@ import { useSearchModalStore } from '../store/useSearchStore';
 const SearchDisplay: React.FC<ISearchDisplayProps> = ({
   isLoading,
   onSearch,
+  onSubmitQuery,
   searchHistory,
   searchResults,
   onClearSearchHistory,
   onResultClick,
 }) => {
-  const { control, watch } = useForm({
+  const { control, watch, handleSubmit } = useForm({
     defaultValues: {
       searchQuery: '',
     },
@@ -34,9 +35,16 @@ const SearchDisplay: React.FC<ISearchDisplayProps> = ({
     onSearch(searchQuery);
   }, [searchQuery, onSearch]);
 
+  const submitSearch = handleSubmit((values) => {
+    onSubmitQuery?.(values.searchQuery);
+  });
+
   return (
     <div>
-      <Form className="px-5">
+      <Form
+        className="px-5"
+        onSubmit={submitSearch}
+      >
         <InputController
           control={control}
           name="searchQuery"
@@ -44,6 +52,12 @@ const SearchDisplay: React.FC<ISearchDisplayProps> = ({
           containerClassName="rounded-none border-none"
           className="translate-y-1/4"
           inputClassName="translate-x-5"
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              event.preventDefault();
+              submitSearch();
+            }
+          }}
           suffix={
             <IconArrowLeftLong
               className="stroke-secondary cursor-pointer"
