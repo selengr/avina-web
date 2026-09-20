@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "eslint ./src --ignore-pattern .eslintignore",
     "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit",
     "format": "prettier --write ./src"
   },
   "dependencies": {

@@ -23,7 +23,12 @@ async function readJsonArray<T>(fileName: string): Promise<T[]> {
 async function writeJsonArray<T>(fileName: string, rows: T[]) {
   await ensureDataDir();
   const filePath = path.join(DATA_DIR, fileName);
-  await fs.writeFile(filePath, JSON.stringify(rows, null, 2), 'utf8');
+  const tempPath = path.join(
+    DATA_DIR,
+    `.${fileName}.${process.pid}.${Date.now()}.tmp`
+  );
+  await fs.writeFile(tempPath, JSON.stringify(rows, null, 2), 'utf8');
+  await fs.rename(tempPath, filePath);
 }
 
 function newEntryId() {
