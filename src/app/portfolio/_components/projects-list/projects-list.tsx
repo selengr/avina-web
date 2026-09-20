@@ -45,6 +45,9 @@ const ProjectsList = ({
               id={item.id}
               title={item.title}
               image={item.image}
+              category={item.category}
+              slug={item.slug}
+              description={item.description}
             />
           </div>
         ))}

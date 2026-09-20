@@ -35,6 +35,11 @@ npm run build
 npm start
 ```
 
+## جستجو
+
+- صفحه `/search` برای جستجو بین صفحات، خدمات و نمونه کارها
+- فیلتر دسته‌بندی + جستجوی متنی در صفحه نمونه کارها
+
 ## Forms (local save)
 
 Newsletter and consulting forms post to:
