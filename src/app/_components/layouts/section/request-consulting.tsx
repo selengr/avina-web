@@ -19,6 +19,7 @@ import {
 import { IconPhone } from '../../icons/icons';
 import SelectBoxController from '../../common/field/select-box/select-box-controller';
 import StylizedButton from '../../common/field/button/stylized-button';
+import { phonePattern } from '@/lib/validation/forms';
 
 type ConsultingFormValues = {
   education: string;
@@ -161,7 +162,7 @@ const RequestConsulting = () => {
                 rules={{
                   required: 'شماره همراه ضروری است',
                   pattern: {
-                    value: /^09\d{9}$/,
+                    value: phonePattern,
                     message: 'شماره همراه معتبر نیست',
                   },
                 }}

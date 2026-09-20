@@ -6,6 +6,22 @@ import SearchDisplay from '../search-display/search-display';
 import { useSearchModalStore, useSearchStore } from '../store/useSearchStore';
 import { searchCatalog } from '@/constans/site-catalog';
 import Link from 'next/link';
+import type { ISearchQueryString } from '@/types/api/search-query-string';
+
+function resolveSearchHref(query: string): string {
+  const trimmed = query.trim();
+  if (!trimmed) return '/search';
+
+  const exact = searchCatalog(trimmed, 'all').find(
+    (item) => item.title === trimmed
+  );
+  if (exact) return exact.href;
+
+  const fuzzy = searchCatalog(trimmed, 'all')[0];
+  if (fuzzy) return fuzzy.href;
+
+  return `/search?q=${encodeURIComponent(trimmed)}`;
+}
 
 const SearchData = () => {
   const router = useRouter();
@@ -15,9 +31,7 @@ const SearchData = () => {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [searchResults, setSearchResults] = useState<
-    { id: number; searchQuery: string; href: string }[]
-  >([]);
+  const [searchResults, setSearchResults] = useState<ISearchQueryString[]>([]);
 
   useEffect(() => {
     if (searchQuery.trim() === '') {
@@ -42,11 +56,7 @@ const SearchData = () => {
     addToSearchHistory(query);
     const match = searchResults.find((item) => item.searchQuery === query);
     toggleSearchModal();
-    if (match?.href) {
-      router.push(match.href);
-    } else {
-      router.push(`/search?q=${encodeURIComponent(query.trim())}`);
-    }
+    router.push(match?.href || resolveSearchHref(query));
   };
 
   const advancedHref = searchQuery.trim()

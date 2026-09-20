@@ -10,7 +10,7 @@ export interface ICardSwiperSlider {
 
 export interface ISwiperSliderProps {
   title?: string;
-  cards: any;
+  cards: ICardSwiperSlider[];
   breakpoints?: {
     [key: number]: { slidesPerView: number; spaceBetween: number };
   };

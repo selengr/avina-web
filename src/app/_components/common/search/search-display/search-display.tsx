@@ -31,10 +31,8 @@ const SearchDisplay: React.FC<ISearchDisplayProps> = ({
   const searchQuery = watch('searchQuery');
 
   useEffect(() => {
-    if (searchQuery.trim()) {
-      onSearch(searchQuery);
-    }
-  }, [searchQuery]);
+    onSearch(searchQuery);
+  }, [searchQuery, onSearch]);
 
   return (
     <div>

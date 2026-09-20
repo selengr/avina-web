@@ -1,36 +1,28 @@
 import { NextResponse } from 'next/server';
 import { saveConsultingRequest } from '@/lib/submissions-store';
+import { consultingSchema } from '@/lib/validation/forms';
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const education = String(body?.education || '').trim();
-    const name = String(body?.name || '').trim();
-    const lastName = String(body?.lastName || '').trim();
-    const phone = String(body?.phone || '').trim();
-    const description = String(body?.description || '').trim();
+    const parsed = consultingSchema.safeParse(body);
 
-    if (!education || !name || !lastName || !phone || !description) {
+    if (!parsed.success) {
+      const phoneIssue = parsed.error.issues.find((issue) =>
+        issue.path.includes('phone')
+      );
+      const message =
+        phoneIssue?.code === 'invalid_string'
+          ? 'شماره همراه معتبر نیست'
+          : 'همه فیلدها ضروری هستند';
+
       return NextResponse.json(
-        { success: false, message: 'همه فیلدها ضروری هستند' },
+        { success: false, message },
         { status: 400 }
       );
     }
 
-    if (!/^09\d{9}$/.test(phone)) {
-      return NextResponse.json(
-        { success: false, message: 'شماره همراه معتبر نیست' },
-        { status: 400 }
-      );
-    }
-
-    const entry = await saveConsultingRequest({
-      education,
-      name,
-      lastName,
-      phone,
-      description,
-    });
+    const entry = await saveConsultingRequest(parsed.data);
 
     return NextResponse.json({
       success: true,

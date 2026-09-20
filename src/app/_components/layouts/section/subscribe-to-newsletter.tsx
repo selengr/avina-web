@@ -17,6 +17,7 @@ import {
 import { IconEmail } from '../../icons/icons';
 import { VerticalImage } from '../../common/vertical-image/vertical-image';
 import StylizedButton from '../../common/field/button/stylized-button';
+import { emailPattern } from '@/lib/validation/forms';
 
 type NewsletterFormValues = {
   email: string;
@@ -90,7 +91,7 @@ const SubscribeToNewsletter = () => {
                 rules={{
                   required: 'آدرس ایمیل ضروری است',
                   pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    value: emailPattern,
                     message: 'ایمیل معتبر نیست',
                   },
                 }}
