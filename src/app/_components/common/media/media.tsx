@@ -13,39 +13,39 @@ import {
 const socialLinks = [
   {
     icon: IconInstagram,
-    url: 'https://instagram.com/rezakarbakksh76',
-    appUrl: 'instagram://user?username=rezakarbakksh76',
-    ariaLabel: 'Instagram Profile',
+    url: 'https://instagram.com/avina',
+    appUrl: 'instagram://user?username=avina',
+    ariaLabel: 'اینستاگرام آوینا',
   },
   {
     icon: IconLinkedin,
-    url: 'https://linkedin.com/in/rezakarbakksh76',
-    appUrl: 'linkedin://profile/rezakarbakksh76',
-    ariaLabel: 'LinkedIn Profile',
+    url: 'https://linkedin.com/company/avina',
+    appUrl: 'linkedin://company/avina',
+    ariaLabel: 'لینکدین آوینا',
   },
   {
     icon: IconTelegram,
-    url: 'https://t.me/rezakarbakksh76',
-    appUrl: 'tg://resolve?domain=rezakarbakksh76',
-    ariaLabel: 'Telegram Profile',
+    url: 'https://t.me/avina',
+    appUrl: 'tg://resolve?domain=avina',
+    ariaLabel: 'تلگرام آوینا',
   },
   {
     icon: IconDiscord,
-    url: 'https://discord.com/users/rezakarbakksh76',
-    appUrl: 'discord://users/rezakarbakksh76',
-    ariaLabel: 'Discord Profile',
+    url: 'https://discord.gg/avina',
+    appUrl: 'discord://invite/avina',
+    ariaLabel: 'دیسکورد آوینا',
   },
   {
     icon: IconYoutube,
-    url: 'https://youtube.com/@rezakarbakksh76',
-    appUrl: 'vnd.youtube://user/rezakarbakksh76',
-    ariaLabel: 'YouTube Channel',
+    url: 'https://youtube.com/@avina',
+    appUrl: 'vnd.youtube://@avina',
+    ariaLabel: 'یوتیوب آوینا',
   },
   {
     icon: IconTwitter,
-    url: 'https://twitter.com/rezakarbakksh76',
-    appUrl: 'twitter://user?screen_name=rezakarbakksh76',
-    ariaLabel: 'Twitter Profile',
+    url: 'https://twitter.com/avina',
+    appUrl: 'twitter://user?screen_name=avina',
+    ariaLabel: 'توییتر آوینا',
   },
 ];
 
@@ -53,23 +53,23 @@ const Media = ({ className }: { className?: string }) => {
   const handleSocialClick = (webUrl: string, appUrl: string) => {
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
       window.location.href = appUrl;
-
       setTimeout(() => {
         window.location.href = webUrl;
       }, 500);
     } else {
-      window.open(webUrl, '_blank');
+      window.open(webUrl, '_blank', 'noopener,noreferrer');
     }
   };
 
   return (
     <div className={cn('flex gap-6 justify-end w-full', className)}>
-      {socialLinks.reverse().map((social, index) => (
+      {[...socialLinks].reverse().map((social) => (
         <button
-          key={index}
+          key={social.ariaLabel}
+          type="button"
           onClick={() => handleSocialClick(social.url, social.appUrl)}
           className="text-gray-600 hover:text-primary transition-colors"
-          // aria-label={social.ariaLabel}
+          aria-label={social.ariaLabel}
         >
           <social.icon
             width="24"

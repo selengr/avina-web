@@ -86,20 +86,26 @@ const EdgeSectionContact: FC<IEdgeSectionContactProps> = ({
           </h3>
 
           <Description className="text-primary-text flex flex-col gap-4">
-            <div className="flex items-center gap-4">
+            <a
+              href="tel:+982132689562"
+              className="flex items-center gap-4 hover:opacity-80 transition-opacity"
+            >
               <IconPhoneContact className="stroke-none fill-primary-text" />
               <p>021-32689562</p>
-            </div>
-            <div className="flex items-center gap-4">
+            </a>
+            <a
+              href="mailto:info@avina.com"
+              className="flex items-center gap-4 hover:opacity-80 transition-opacity"
+            >
               <IconMailContact className="stroke-none fill-primary-text" />
-              <p>021-32689562</p>
-            </div>
+              <p>info@avina.com</p>
+            </a>
             <div className="flex items-center gap-4">
               <IconLocationContact
                 fillRule="evenodd"
                 className="stroke-none fill-primary-text"
               />
-              <p>021-32689562</p>
+              <p>تهران، ایران</p>
             </div>
           </Description>
         </Wrapper>

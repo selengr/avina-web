@@ -1,10 +1,11 @@
 import Title from '../common/field/title';
 import Wrapper from '../common/field/wrapper';
 import Description from '../common/field/description';
-import StylizedButton from '../common/field/button/stylized-button';
 import httpService from '@/services/api/http-service';
 import { TNewsAndArticlesData } from '@/types/news-and-articles';
 import SwiperSliderWrapper from './swiper-slider-wrapper';
+import NewsReadMoreButton from './news-read-more-button';
+import { HOST_API_KEY } from '../../../../config-global';
 
 const fallbackNews: TNewsAndArticlesData[] = [
   {
@@ -75,16 +76,18 @@ const fallbackNews: TNewsAndArticlesData[] = [
 export default async function NewsAndArticles() {
   let newsArticles: TNewsAndArticlesData[] = fallbackNews;
 
-  try {
-    const response = await httpService.get<TNewsAndArticlesData[]>(
-      '/api/v1/public/news'
-    );
-    const payload = response?.data?.data;
-    if (Array.isArray(payload) && payload.length > 0) {
-      newsArticles = payload;
+  if (HOST_API_KEY) {
+    try {
+      const response = await httpService.get<TNewsAndArticlesData[]>(
+        '/api/v1/public/news'
+      );
+      const payload = response?.data?.data;
+      if (Array.isArray(payload) && payload.length > 0) {
+        newsArticles = payload;
+      }
+    } catch {
+      // Keep fallback cards when the public news API is unavailable.
     }
-  } catch {
-    // Keep fallback cards when the public news API is unavailable.
   }
 
   return (
@@ -98,10 +101,7 @@ export default async function NewsAndArticles() {
             تا نکات کاربردی برای رشد کسب‌وکار دیجیتال شما.
           </Description>
 
-          <StylizedButton
-            text={'بیشتر بخوانید...'}
-            className="my-2 md:my-0 md:mt-4 py-2 min-w-52"
-          />
+          <NewsReadMoreButton />
         </Wrapper>
 
         <div className="md:max-w-[60%] lg:max-w-[70%] xs:-mx-4">

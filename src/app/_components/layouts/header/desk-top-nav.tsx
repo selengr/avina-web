@@ -1,29 +1,39 @@
 'use client';
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { getMenuOptions } from './_api/getMenuOptions';
 import { IMenuProps } from '@/types/api/mobile-menu.types';
 import { useEffect, useState } from 'react';
+import { fallbackNavMenus } from '../shared/fallback-nav-menus';
 
 export default function DesktopNav() {
   const pathname = usePathname();
-  const [menuLinksData, setMenuLinksData] = useState<IMenuProps[]>([]);
+  const [menuLinksData, setMenuLinksData] =
+    useState<IMenuProps[]>(fallbackNavMenus);
 
   useEffect(() => {
-    getMenuOptions().then(setMenuLinksData);
+    getMenuOptions()
+      .then((menus) => {
+        if (menus?.length) setMenuLinksData(menus);
+      })
+      .catch(() => setMenuLinksData(fallbackNavMenus));
   }, []);
 
   return (
     <nav className="hidden lg:flex items-center space-x-2 rtl:space-x-reverse">
       {menuLinksData?.map((link: IMenuProps) => {
-        const linkPath = link?.link.startsWith('/')
+        const linkPath = link?.link?.startsWith('/')
           ? link.link
           : `/${link.link}`;
-        const isActive = pathname === linkPath;
+        const isActive =
+          linkPath === '/'
+            ? pathname === '/'
+            : pathname === linkPath || pathname.startsWith(`${linkPath}/`);
         return (
           <Link
             prefetch
-            key={link?.link}
+            key={link?.id ?? link?.link}
             href={linkPath}
             className={`relative border rounded-full px-4 py-1 transition-colors ${
               isActive
