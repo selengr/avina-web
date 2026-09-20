@@ -1,6 +1,8 @@
-import type React from 'react';
+'use client';
 
+import type React from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import ExperienceCard from './experience-card';
 import SatisfactionCard from './satisfaction-card';
@@ -16,11 +18,12 @@ interface BannerProps {
   botImage: string;
   totalUsers: string;
   satisfactionPercentage: number;
+  ctaHref?: string;
+  ctaText?: string;
 }
 
 const Banner: React.FC<BannerProps> = ({
   title,
-  subtitle,
   description,
   logoSrc,
   bgImage1,
@@ -28,7 +31,11 @@ const Banner: React.FC<BannerProps> = ({
   botImage,
   satisfactionPercentage,
   totalUsers,
+  ctaHref = '/about',
+  ctaText = 'بیشتر بدانید...',
 }) => {
+  const router = useRouter();
+
   return (
     <div className="relative lg:mt-[22px] flex justify-center w-full bg-neutral rounded-3xl lg:rounded-[42px] h-[560px] lg:h-[781px] py-6">
       <div
@@ -73,7 +80,8 @@ const Banner: React.FC<BannerProps> = ({
         <div className="absolute left-4 flex lg:left-auto lg:bottom-32 lg:right-[40%]">
           <StylizedButton
             className="w-48 z-0"
-            text=" بیشتر بدانید..."
+            text={ctaText}
+            onClick={() => router.push(ctaHref)}
           />
         </div>
       </div>

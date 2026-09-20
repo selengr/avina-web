@@ -11,7 +11,7 @@ const page = () => {
       <div className="md:px-4 lg:px-8 2xl:px-48">
         <BannerV2
           title="تماس با ما"
-          description="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است."
+          description="برای مشاوره، پشتیبانی یا شروع همکاری پیام بگذارید؛ معمولاً سریع پاسخ می‌دهیم."
           bgImage1="bg-banner-m-bg2"
           bgImage2="bg-banner-d-bg2"
           botImage="bg-bot5-m lg:bg-bot5-d"

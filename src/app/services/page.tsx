@@ -39,34 +39,34 @@ const ServicesPage: FC = () => {
   const [isMounted, setIsMounted] = useState(false);
   const services: ServiceSectionProps[] = [
     {
-      sectionName: 'Software',
+      sectionName: 'نرم‌افزار',
       imageSrc: 'avina-service1',
       title: 'نرم افزار',
       id: 'software',
     },
     {
-      sectionName: 'Hardware',
+      sectionName: 'سخت‌افزار',
       imageSrc: 'avina-service2',
       title: 'سخت افزار',
       isLtr: true,
       id: 'hardware',
     },
     {
-      sectionName: 'Information security',
+      sectionName: 'امنیت اطلاعات',
       imageSrc: 'avina-service3',
       title: 'امنیت اطلاعات',
       id: 'information-security',
     },
     {
-      sectionName: 'Network',
+      sectionName: 'شبکه',
       imageSrc: 'avina-service4',
       title: 'شبکه و ارتباطات',
       isLtr: true,
       id: 'network',
     },
     {
-      sectionName: 'Training and support',
-      imageSrc: 'avina-service3',
+      sectionName: 'آموزش و پشتیبانی',
+      imageSrc: 'avina-service1',
       title: 'آموزش و پشتیبانی',
       id: 'training-and-support',
     },
@@ -99,7 +99,9 @@ const ServicesPage: FC = () => {
         <Banner
           title="خدمــات آوینـــــا"
           subtitle=""
-          description="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است."
+          description="از نرم‌افزار سفارشی تا سخت‌افزار، شبکه و امنیت — خدمات آوینا را یک‌جا ببینید و برای مشاوره اقدام کنید."
+          ctaHref="/contact"
+          ctaText="درخواست مشاوره"
           bgImage1="bg-banner-m-bg1"
           bgImage2="bg-banner-d-bg1 [&>h3]:lg:text-[60px] [&>h3]:xl:text-[113px]"
           botImage="bg-bot2-m lg:bg-bot2-d lg:left-10"
