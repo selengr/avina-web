@@ -65,17 +65,17 @@ export default function SwiperSliderWrapper({
       : `/${project.image || 'placeholder.svg'}`;
 
     return (
-      <Card className="group relative overflow-hidden transition-all hover:shadow-lg p-4 bg-white">
-        <div className="overflow-hidden">
+      <Card className="group relative overflow-hidden rounded-3xl transition-all duration-300 hover:shadow-lg p-4 bg-white h-full">
+        <div className="overflow-hidden rounded-2xl">
           <Image
             src={imageSrc}
             alt={project.title}
             width={268}
             height={318}
-            className="transition-transform duration-300 group-hover:scale-105 object-cover h-[200px] xs:h-[240px] md:max-h-[311px]"
+            className="transition-transform duration-500 group-hover:scale-105 object-cover h-[200px] xs:h-[240px] md:max-h-[311px] w-full"
           />
         </div>
-        <div className="bg-primary-lighter rounded-3xl w-[102px] h-28px mt-4 mb-2 flex gap-2 p-1 space-x-2">
+        <div className="bg-primary-lighter rounded-3xl w-[102px] mt-4 mb-2 flex gap-2 p-1 items-center">
           <IconCalendar
             width="22"
             height="20"
@@ -88,12 +88,12 @@ export default function SwiperSliderWrapper({
           </span>
         </div>
         <div className="w-full mb-2">
-          <h6 className="text-primary-text text-m-subtitle2 font-semibold md:font-kalameh">
+          <h6 className="text-primary-text text-m-subtitle2 font-semibold md:font-kalameh line-clamp-2">
             {project.title}
           </h6>
-          <span className="text-secondary text-m-body2 md:font-kalameh">
+          <span className="text-secondary text-m-body2 md:font-kalameh line-clamp-2">
             {project.summary ||
-              'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...'}
+              'خلاصه خبر به‌زودی از طریق پنل مدیریت به‌روز می‌شود.'}
           </span>
         </div>
       </Card>

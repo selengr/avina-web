@@ -15,11 +15,11 @@ import {
 } from './dynamic-sections';
 
 const cards = [
-  { title: 'Forest Adventure', src: 'service-card1.svg' },
-  { title: 'Valley of life', src: 'service-card2.svg' },
-  { title: 'Sala behta hi jayega', src: 'service-card3.svg' },
-  { title: 'Camping is for pros', src: 'service-card4.svg' },
-  { title: 'The road not taken', src: 'service-card5.svg' },
+  { title: 'شبکه و ارتباطات', src: 'service-card1.svg' },
+  { title: 'نرم افزار', src: 'service-card2.svg' },
+  { title: 'سخت افزار', src: 'service-card3.svg' },
+  { title: 'امنیت اطلاعات', src: 'service-card4.svg' },
+  { title: 'آموزش و پشتیبانی', src: 'service-card5.svg' },
 ];
 
 export default function HomePage() {

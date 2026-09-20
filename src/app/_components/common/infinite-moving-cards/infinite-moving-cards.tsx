@@ -1,37 +1,16 @@
 'use client';
+
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const testimonials = [
-  {
-    src: 'logo1',
-    name: 'A Tale of Two Cities',
-  },
-  {
-    src: 'logo2',
-    name: 'William Shakespeare',
-  },
-  {
-    src: 'logo3',
-    name: '3',
-  },
-  {
-    src: 'logo4',
-    name: '4',
-  },
-  {
-    src: 'logo5',
-    name: '5',
-  },
-  {
-    src: 'logo6',
-    name: '6',
-  },
-  // {
-  //   src: "logo7",
-  //    name: "7"
-  // },
+  { src: 'logo1', name: 'شریک ۱' },
+  { src: 'logo2', name: 'شریک ۲' },
+  { src: 'logo3', name: 'شریک ۳' },
+  { src: 'logo4', name: 'شریک ۴' },
+  { src: 'logo5', name: 'شریک ۵' },
+  { src: 'logo6', name: 'شریک ۶' },
 ];
 
 const InfiniteMovingCards = ({
@@ -50,110 +29,74 @@ const InfiniteMovingCards = ({
   pauseOnHover?: boolean;
   className?: string;
 }) => {
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const scrollerRef = React.useRef<HTMLUListElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollerRef = useRef<HTMLUListElement>(null);
+  const [start, setStart] = useState(false);
+  const duplicatedRef = useRef(false);
 
   useEffect(() => {
-    addAnimation();
-  }, []);
-  const [start, setStart] = useState(false);
-  function addAnimation() {
-    if (containerRef.current && scrollerRef.current) {
-      const scrollerContent = Array.from(scrollerRef.current.children);
+    if (!containerRef.current || !scrollerRef.current) return;
+    if (duplicatedRef.current) return;
 
-      scrollerContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
-        if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem);
-        }
-      });
+    const scrollerContent = Array.from(scrollerRef.current.children);
+    scrollerContent.forEach((item) => {
+      const duplicatedItem = item.cloneNode(true);
+      scrollerRef.current?.appendChild(duplicatedItem);
+    });
+    duplicatedRef.current = true;
 
-      getDirection();
-      getSpeed();
-      setStart(true);
-    }
-  }
-  const getDirection = () => {
-    if (containerRef.current) {
-      if (direction === 'left') {
-        containerRef.current.style.setProperty(
-          '--animation-direction',
-          'forwards'
-        );
-      } else {
-        containerRef.current.style.setProperty(
-          '--animation-direction',
-          'reverse'
-        );
-      }
-    }
-  };
-  const getSpeed = () => {
-    if (containerRef.current) {
-      if (speed === 'fast') {
-        containerRef.current.style.setProperty('--animation-duration', '20s');
-      } else if (speed === 'normal') {
-        containerRef.current.style.setProperty('--animation-duration', '40s');
-      } else {
-        containerRef.current.style.setProperty('--animation-duration', '80s');
-      }
-    }
-  };
+    containerRef.current.style.setProperty(
+      '--animation-direction',
+      direction === 'left' ? 'forwards' : 'reverse'
+    );
+
+    const duration =
+      speed === 'fast' ? '28s' : speed === 'normal' ? '45s' : '80s';
+    containerRef.current.style.setProperty('--animation-duration', duration);
+    setStart(true);
+  }, [direction, speed]);
+
   return (
-    <div className=" h-[154px] flex antialiased  items-center justify-center relative  w-screen ">
+    <div className="h-[154px] flex antialiased items-center justify-center relative w-screen">
       <div
         ref={containerRef}
         className={cn(
-          'scroller relative z-20 border-y-[1px] overflow-hidden',
-          // [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]
+          'scroller relative z-20 border-y border-divider overflow-hidden',
           className
         )}
       >
         <ul
           ref={scrollerRef}
           className={cn(
-            ' flex shrink-0 gap-4 py-1 flex-nowrap items-center justify-center',
-            start && 'animate-scroll ',
+            'flex shrink-0 gap-4 py-1 flex-nowrap items-center justify-center',
+            start && 'animate-scroll',
             pauseOnHover && 'hover:[animation-play-state:paused]'
           )}
         >
-          {items.map((item, idx) => (
+          {items.map((item) => (
             <li
               className="w-[200px] relative flex-shrink-0 px-2 py-6 md:py-9"
-              style={
-                {
-                  // background:
-                  //   "linear-gradient(180deg, var(--slate-800), var(--slate-900)",
-                }
-              }
-              key={item.name}
+              key={item.src}
             >
-              <blockquote>
-                <div
-                  aria-hidden="true"
-                  className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_80px)] w-[calc(100%_+_4px)]"
-                ></div>
-                <div className="relative z-20 leading-[1.6] flex flex-row items-center justify-center">
-                  <div className="w-[236px] flex items-center justify-center">
-                    <Image
-                      src={`/logo/${item.src}.svg` || '/images/placeholder.svg'}
-                      alt="logo"
-                      width={236}
-                      height={60}
-                      // className="mx-4"
-                    />
-                  </div>
-                  <div className="w-[26px] flex items-center justify-center">
-                    <Image
-                      src={'/logo/spacer.svg'}
-                      alt="spacer"
-                      width={26}
-                      height={26}
-                      className="mr-12 ml-2"
-                    />
-                  </div>
+              <div className="relative z-20 leading-[1.6] flex flex-row items-center justify-center">
+                <div className="w-[236px] flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity">
+                  <Image
+                    src={`/logo/${item.src}.svg`}
+                    alt={item.name}
+                    width={236}
+                    height={60}
+                  />
                 </div>
-              </blockquote>
+                <div className="w-[26px] flex items-center justify-center">
+                  <Image
+                    src="/logo/spacer.svg"
+                    alt=""
+                    width={26}
+                    height={26}
+                    className="mr-12 ml-2"
+                  />
+                </div>
+              </div>
             </li>
           ))}
         </ul>

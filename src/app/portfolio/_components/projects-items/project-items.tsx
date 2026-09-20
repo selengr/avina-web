@@ -1,26 +1,29 @@
+'use client';
+
 import React, { useState } from 'react';
-import { Card } from '../../../_components/common/card/card';
 import Image from 'next/image';
+import { Card } from '../../../_components/common/card/card';
 import { IProjectsItemsProps } from './projects-items.types';
 import StylizedButton from '@/app/_components/common/field/button/stylized-button';
 import GifScreen from '@/app/_components/common/gif';
 
 const ProjectItems: React.FC<IProjectsItemsProps> = ({ image, title }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const imageSrc = image?.startsWith('/') ? image : `/${image || 'images/placeholder.svg'}`;
 
   return (
     <Card
-      className="group relative overflow-hidden transition-all hover:shadow-lg"
+      className="group relative overflow-hidden rounded-3xl border-none bg-transparent shadow-none transition-all"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative overflow-hidden rounded-3xl">
+      <div className="relative overflow-hidden rounded-3xl shadow-sm transition-shadow duration-300 group-hover:shadow-lg">
         <Image
-          src={'/' + image || '/images/placeholder.svg'}
-          alt="icon"
-          width={300}
-          height={225}
-          className="h-full w-full object-cover transition-transform duration-300"
+          src={imageSrc}
+          alt={title || 'نمونه کار'}
+          width={360}
+          height={270}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
         {isHovered && (
           <GifScreen

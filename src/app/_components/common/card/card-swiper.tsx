@@ -1,11 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
+import { useEffect, useMemo, useState } from 'react';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Description from '../../common/field/description';
-
 import { motion, AnimatePresence } from 'framer-motion';
 import { IconCircleArrowLeft, IconCircleArrowRight } from '../../icons/icons';
 
@@ -16,9 +14,10 @@ type Testimonial = {
   src: string;
   className: string;
 };
+
 const AnimatedTestimonials = ({
   testimonials,
-  autoplay = false,
+  autoplay = true,
 }: {
   testimonials: Testimonial[];
   autoplay?: boolean;
@@ -33,99 +32,60 @@ const AnimatedTestimonials = ({
     setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
-  const isActive = (index: number) => {
-    return index === active;
-  };
-
   useEffect(() => {
-    if (autoplay) {
-      const interval = setInterval(handleNext, 5000);
-      return () => clearInterval(interval);
-    }
-  }, [autoplay]);
+    if (!autoplay || testimonials.length < 2) return;
+    const interval = setInterval(handleNext, 5500);
+    return () => clearInterval(interval);
+  }, [autoplay, testimonials.length, active]);
 
-  const randomRotateY = () => {
-    return Math.floor(Math.random() * 21) - 10;
-  };
-
-  //   const containerRef = useRef<HTMLDivElement>(null);
-  //   const [touchStart, setTouchStart] = useState(0);
-  //   const [touchEnd, setTouchEnd] = useState(0);
-
-  //   const handleTouchStart = (e: TouchEvent<HTMLDivElement>) => {
-  //     setTouchStart(e.targetTouches[0].clientX);
-  //   };
-
-  //   const handleTouchMove = (e: TouchEvent<HTMLDivElement>) => {
-  //     setTouchEnd(e.targetTouches[0].clientX);
-  //   };
-
-  //   const handleTouchEnd = () => {
-  //     if (touchStart - touchEnd > 75) {
-  //       handleNext();
-  //     }
-
-  //     if (touchStart - touchEnd < -75) {
-  //       handlePrev();
-  //     }
-  //   };
-
-  // if(IsClient()) return<></>
+  const rotations = useMemo(
+    () => testimonials.map((_, i) => ((i * 7) % 21) - 10),
+    [testimonials]
+  );
 
   return (
-    <div
-      //   ref={containerRef}
-      className="relative w-[95%] lg:w-full max-w-[816px] antialiased font-sans px-4 md:px-16 lg:px-16 xl:px-28 pt-12"
-      //   onTouchStart={handleTouchStart}
-      //   onTouchMove={handleTouchMove}
-      //   onTouchEnd={handleTouchEnd}
-    >
+    <div className="relative w-[95%] lg:w-full max-w-[816px] antialiased font-sans px-4 md:px-16 lg:px-16 xl:px-28 pt-12">
       <div className="relative gap-52">
-        <div>
-          <div className="relative h-52 xs:h-64 md:h-80 w-full">
-            <AnimatePresence>
-              {testimonials.map((testimonial, index) => (
+        <div className="relative h-52 xs:h-64 md:h-80 w-full">
+          <AnimatePresence>
+            {testimonials.map((testimonial, index) => {
+              const isActive = index === active;
+              return (
                 <motion.div
-                  key={testimonial.src}
+                  key={`${testimonial.name}-${index}`}
                   initial={{
                     opacity: 0,
-                    scale: 0.9,
-                    z: -100,
-                    rotate: randomRotateY(),
+                    scale: 0.92,
+                    rotate: rotations[index],
                   }}
                   animate={{
-                    opacity: isActive(index) ? 1 : 0.7,
-                    scale: isActive(index) ? 1 : 0.95,
-                    z: isActive(index) ? 0 : -100,
-                    rotate: isActive(index) ? 0 : randomRotateY(),
-                    zIndex: isActive(index)
-                      ? 999
-                      : testimonials.length + 2 - index,
-                    y: isActive(index) ? [0, -80, 0] : 0,
+                    opacity: isActive ? 1 : 0.55,
+                    scale: isActive ? 1 : 0.94,
+                    rotate: isActive ? 0 : rotations[index],
+                    zIndex: isActive ? 40 : testimonials.length - index,
+                    y: isActive ? [0, -24, 0] : 0,
                   }}
                   exit={{
                     opacity: 0,
-                    scale: 0.9,
-                    z: 100,
-                    rotate: randomRotateY(),
+                    scale: 0.92,
+                    rotate: rotations[index],
                   }}
                   transition={{
-                    duration: 0.4,
+                    duration: 0.35,
                     ease: 'easeInOut',
                   }}
                   className="absolute inset-0 origin-bottom"
                 >
                   <div
                     className={cn(
-                      //   'h-[402px] w-[343px] md:h-[319px] md:w-[629px] rounded-3xl relative',
-                      'h-[300px] xs:h-[320px] w-full md:h-[319px] rounded-3xl relative',
+                      'h-[300px] xs:h-[320px] w-full md:h-[319px] rounded-3xl relative shadow-sm',
                       testimonial.className
                     )}
                   >
-                    {isActive(index) && (
+                    {isActive && (
                       <Image
-                        src={'/images/avatar.svg'}
-                        alt={'quote'}
+                        src="/images/avatar.svg"
+                        alt=""
                         width={100}
                         height={100}
                         draggable={false}
@@ -134,55 +94,39 @@ const AnimatedTestimonials = ({
                     )}
 
                     <Image
-                      src={'/images/quote.svg'}
-                      alt={'quote'}
+                      src="/images/quote.svg"
+                      alt=""
                       width={100}
                       height={100}
                       draggable={false}
                       className="h-[40px] w-[60px] md:h-[95px] md:w-[143px] object-cover object-center absolute left-6 top-28 md:top-12"
                     />
-                    <h5 className="flex justify-center pt-[72px] font-kalameh font-bold text-d-h5 text-primary">
-                      سمیرا خرمی
-                    </h5>
 
-                    <Description className="flex justify-center pt-[72px] text-d-body1 text-secondary px-7 text-justify">
-                      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ
-                      و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه
-                      روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای
-                      شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف
-                      بهبود ابزارهای کاربردی می باشد.
+                    <h5 className="flex justify-center pt-[72px] font-kalameh font-bold text-d-h5 text-primary">
+                      {testimonial.name}
+                    </h5>
+                    <p className="text-center text-m-caption text-secondary mt-1">
+                      {testimonial.designation}
+                    </p>
+
+                    <Description className="flex justify-center pt-4 md:pt-6 text-d-body1 text-secondary px-7 text-justify">
+                      {testimonial.quote}
                     </Description>
                   </div>
                 </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
+              );
+            })}
+          </AnimatePresence>
         </div>
       </div>
-      <div className=" flex justify-between flex-col pt-14 md:py-4">
-        <motion.div
-          key={active}
-          initial={{
-            y: 20,
-            opacity: 0,
-          }}
-          animate={{
-            y: 0,
-            opacity: 1,
-          }}
-          exit={{
-            y: -20,
-            opacity: 0,
-          }}
-          transition={{
-            duration: 0.2,
-            ease: 'easeInOut',
-          }}
-        ></motion.div>
-        <div className="flex gap-4 pt-12 md:pt-12 w-full ">
+
+      <div className="flex justify-between flex-col pt-14 md:py-4">
+        <div className="flex gap-4 pt-12 md:pt-12 w-full">
           <button
+            type="button"
             onClick={handlePrev}
-            className="h-10 w-10 rounded-full md:absolute  md:left-0 md:top-[45%] flex items-center justify-center group/button "
+            aria-label="نظر قبلی"
+            className="h-10 w-10 rounded-full md:absolute md:left-0 md:top-[45%] flex items-center justify-center group/button hover:opacity-80 transition-opacity"
           >
             <IconCircleArrowLeft
               width="36"
@@ -193,8 +137,10 @@ const AnimatedTestimonials = ({
             />
           </button>
           <button
+            type="button"
             onClick={handleNext}
-            className="h-10 w-10 rounded-full md:absolute md:right-0 md:top-[45%] flex items-center justify-center group/button"
+            aria-label="نظر بعدی"
+            className="h-10 w-10 rounded-full md:absolute md:right-0 md:top-[45%] flex items-center justify-center group/button hover:opacity-80 transition-opacity"
           >
             <IconCircleArrowRight
               width="36"
@@ -209,6 +155,5 @@ const AnimatedTestimonials = ({
     </div>
   );
 };
-//
 
 export default AnimatedTestimonials;

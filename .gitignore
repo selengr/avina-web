@@ -52,3 +52,5 @@ yarn-error.log
 /.gzipper/
 tsconfig.tsbuildinfo
 next-env.d.ts
+public/video/video1.mp4
+public/video/video2.mp4
