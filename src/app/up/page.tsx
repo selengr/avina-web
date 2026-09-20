@@ -1,3 +1,5 @@
-export default function UpPage() {
-  return <></>;
+import { redirect } from 'next/navigation';
+
+export default function UpStubPage() {
+  redirect('/');
 }

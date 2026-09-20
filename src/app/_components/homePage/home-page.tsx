@@ -29,7 +29,7 @@ export default function HomePage() {
         <Banner
           title="آوینــــــــا"
           subtitle=""
-          description="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است."
+          description="آوینا کنار کسب‌وکارهاست؛ از نرم‌افزار و شبکه تا امنیت و پشتیبانی، تا کار روزمره پایدارتر پیش برود."
           logoSrc="/logo/service.svg"
           bgImage1="xs:bg-banner-m-bg1"
           bgImage2="lg:bg-banner-d-bg1"

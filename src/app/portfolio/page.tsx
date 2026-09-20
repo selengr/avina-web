@@ -12,7 +12,7 @@ const PortfolioPage = () => {
       <div className="md:px-4 lg:px-8 2xl:px-48">
         <BannerV2
           title="نمونه کارها"
-          description="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است."
+          description="چند نمونه از کارهایی که برای مشتریان انجام داده‌ایم؛ از داشبورد و پرتال تا راهکارهای سازمانی."
           bgImage1="bg-banner-m-bg3"
           bgImage2="bg-banner-d-bg3"
           botImage="bg-bot3-m lg:bg-bot3-d"
