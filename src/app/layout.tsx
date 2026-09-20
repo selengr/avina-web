@@ -6,6 +6,7 @@ import Header from './_components/layouts/header/header';
 import Footer from './_components/layouts/footer/Footer';
 import ChatIcon from './_components/layouts/online-chat/chat-icon';
 import CustomScrollbar from './_components/common/custom-scrollbar/custom-scrollbar';
+import AppProviders from './_components/providers/app-providers';
 
 // Fonts
 import { kalameh, museoModerno } from '@/constans/font';
@@ -54,13 +55,15 @@ export default function RootLayout({
       <body
         className={`${kalameh.className} antialiased bg-paper relative overflow-x-hidden`}
       >
-        <div className="md:px-4 lg:px-8 2xl:px-48">
-          <Header />
-        </div>
-        {children}
-        <Footer />
-        <CustomScrollbar />
-        <ChatIcon />
+        <AppProviders>
+          <div className="md:px-4 lg:px-8 2xl:px-48">
+            <Header />
+          </div>
+          {children}
+          <Footer />
+          <CustomScrollbar />
+          <ChatIcon />
+        </AppProviders>
       </body>
     </html>
   );
