@@ -2,11 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import Lottie from 'react-lottie';
-import loadingData from '../../../../../public/Stripes.json';
-
-// ----------------------------------------------------------------------
-
-// ----------------------------------------------------------------------
+import { useEffect, useState } from 'react';
 
 export default function GifScreen({
   className,
@@ -15,32 +11,44 @@ export default function GifScreen({
   className?: string;
   style?: object;
 }) {
+  const [animationData, setAnimationData] = useState<object | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/Stripes.json')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!cancelled && data) setAnimationData(data);
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (!animationData) return null;
+
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    animationData: loadingData,
-    renxdererSettings: {
+    animationData,
+    rendererSettings: {
       preserveAspectRatio: 'xMidYMid meet',
       clearCanvas: true,
     },
-    backgroundColor: '#FFF',
   };
 
   return (
     <div
-      className={cn(
-        'w-full h-full flex justify-center items-center z-30',
-        className
-      )}
+      className={cn('pointer-events-none', className)}
+      style={style}
+      aria-hidden
     >
       <Lottie
         options={defaultOptions}
-        style={{
-          zIndex: 30,
-          opacity: 0.4,
-          mixBlendMode: 'luminosity',
-          ...style,
-        }}
+        height="100%"
+        width="100%"
+        isClickToPauseDisabled
       />
     </div>
   );

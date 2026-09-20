@@ -101,10 +101,10 @@ export default {
         },
         scroll: {
           from: {
-            transform: "translate(50%))",
+            transform: 'translateX(0)',
           },
           to: {
-            transform: "translate(50%)",
+            transform: 'translateX(-50%)',
           },
         },
       },

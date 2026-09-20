@@ -110,29 +110,30 @@ export default function SwiperSliderWrapper({
     <SwiperSlider
       breakpoints={{
         0: {
-          slidesPerView: 1.08,
-          spaceBetween: 10,
+          slidesPerView: 1.12,
+          spaceBetween: 12,
         },
         480: {
           slidesPerView: 1.35,
-          spaceBetween: 12,
+          spaceBetween: 14,
         },
         768: {
-          slidesPerView: 2,
+          slidesPerView: 2.15,
           spaceBetween: 16,
         },
         1024: {
           slidesPerView: 3,
-          spaceBetween: 16,
+          spaceBetween: 18,
         },
         1440: {
           slidesPerView: 4,
-          spaceBetween: 16,
+          spaceBetween: 18,
         },
       }}
-      className="px-0"
+      className="px-0 pt-4 md:pt-0"
       cards={cards}
       renderSlide={renderSlide}
+      showNav
     />
   );
 }
