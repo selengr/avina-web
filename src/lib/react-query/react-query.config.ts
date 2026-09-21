@@ -18,6 +18,3 @@ export function createQueryClient() {
     },
   });
 }
-
-// Shared client for the app provider (browser only via AppProviders).
-export const queryClient = createQueryClient();

@@ -56,7 +56,6 @@ const Drawer: React.FC<IDrawerProps> = ({ isOpen, onClose, children }) => {
             height={28}
             alt="Avina IT Solutions Logo"
             src="/logo/logo.svg"
-            // className={className}
           />
           <Search />
         </DrawerHeader>

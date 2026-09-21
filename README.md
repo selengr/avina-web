@@ -1,27 +1,19 @@
 # avina-web
 
-Company site for Avina (آوینا). Persian / RTL, built with Next.js.
+Company website for Avina (آوینا). Persian / RTL. I use this as a real Next.js portfolio piece, not a throwaway demo.
 
-I keep this in my portfolio as a real product-style site: home, about, services, portfolio, and contact.
-
-## What it does
-
-- Public pages for the company
-- Consulting request form (saved locally via API routes)
-- Newsletter signup
-- News block with sample cards when the backend is offline
-- Shared header and footer
-- Assets under `public/` (mp4 videos stay local — see `.gitignore`)
+Pages cover the usual company stuff: home, about, services, portfolio, and contact. Newsletter and consulting forms still work without a live backend — they write JSON under `data/`.
 
 ## Stack
 
-- Next.js 15
-- React 19
+- Next.js 15 + React 19
 - TypeScript
-- Tailwind CSS
-- Framer Motion + Swiper
+- Tailwind
+- Framer Motion / Swiper / Embla
+- React Query
+- Zod for form validation
 
-## Run it
+## Setup
 
 ```bash
 npm install
@@ -29,41 +21,53 @@ cp .env.local.example .env.local
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open http://localhost:3000
 
-## Build
+Fonts and images live in `public/`. Local mp4 files under `public/video/` stay gitignored on purpose (they’re big).
+
+## Build / checks
 
 ```bash
 npm run build
 npm start
+
+npm run lint
+npm run typecheck
 ```
 
 ## Env
 
 Copy from `.env.local.example`:
 
-- `NEXT_PUBLIC_HOST_API_KEY` — backend base URL (optional)
-- `NEXT_PUBLIC_SITE_URL` — sitemap / robots
-- `SUBMISSIONS_READ_TOKEN` — only needed if you want to read saved form rows
+| Variable | What it’s for |
+| --- | --- |
+| `NEXT_PUBLIC_HOST_API_KEY` | API base. Leave empty to use static menus/news. |
+| `NEXT_PUBLIC_SITE_URL` | Canonical URL for sitemap / robots. |
+| `SUBMISSIONS_READ_TOKEN` | Optional. Needed to read saved form rows. |
+
+## Useful routes
+
+- `/search?q=` — pages, services, portfolio
+- `/portfolio` — list + filters
+- `/portfolio/[slug]` — project detail
+- `/sitemap.xml`, `/robots.txt`
+
+Sandbox paths `/ali` and `/up` just redirect home.
 
 ## Forms
 
-Posts go to:
+They post to local API routes and store JSON under `data/` (gitignored):
 
-- `POST /api/newsletter` with `{ "email": "..." }`
-- `POST /api/consulting` with education, name, lastName, phone, description
+- `POST /api/newsletter` — `{ "email": "..." }`
+- `POST /api/consulting` — education, name, lastName, phone, description
 
-To list saved rows (needs the token):
+List saved rows (token required):
 
 - `GET /api/newsletter?token=...`
 - `GET /api/consulting?token=...`
 
-Files land in `data/` (gitignored).
-
 ## Notes
 
-- Portfolio has category pages and detail routes under `/portfolio`
-- Old sandbox routes `/ali` and `/up` redirect home
-- Form data is only for local/dev use right now
+If the public API is down, menus and news fall back to static content so the site still loads.
 
-Repo: [github.com/selengr/avina-web](https://github.com/selengr/avina-web)
+Repo: https://github.com/selengr/avina-web
