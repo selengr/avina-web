@@ -7,20 +7,18 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TTextareaProps>(
   ({ hasError = false, className, errorText, ...rest }, ref) => {
     return (
       <div className="textarea-wrapper">
-        {/* Textarea Element */}
         <textarea
           ref={ref}
           className={cn(
             'textarea',
             {
-              'textarea-error': hasError, // حالت ارور
+              'textarea-error': hasError,
             },
             className
           )}
           {...rest}
         />
 
-        {/* Helper Text */}
         {hasError && (
           <HelperText
             text={errorText!}

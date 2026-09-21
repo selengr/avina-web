@@ -14,9 +14,9 @@ export const Input = forwardRef<HTMLInputElement, TInputProps>(
       addonAfter,
       className,
       disabled,
-      hasError = false, // پیش‌فرض بدون خطا
-      helperText = '', // پیام خطا
-      direction = 'rtl', // مقدار پیش‌فرض برای direction
+      hasError = false,
+      helperText = '',
+      direction = 'rtl',
       errorText,
       containerClassName,
       inputClassName,
@@ -34,8 +34,8 @@ export const Input = forwardRef<HTMLInputElement, TInputProps>(
               'input-disabled': disabled,
               'rtl-direction': direction === 'rtl',
               'ltr-direction': direction === 'ltr',
-              'border-error': hasError, // اضافه کردن کلاس border-error در صورت وجود خطا
-              'border-gray-400': !hasError, // اضافه کردن کلاس border-error در صورت وجود خطا
+              'border-error': hasError,
+              'border-gray-400': !hasError,
             },
             className
           )}
@@ -65,10 +65,10 @@ export const Input = forwardRef<HTMLInputElement, TInputProps>(
                   hasError,
                 'no-radius-left':
                   (addonBefore && direction === 'ltr') ||
-                  (addonAfter && direction === 'rtl'), // بدون radius چپ
+                  (addonAfter && direction === 'rtl'),
                 'no-radius-right':
                   (addonBefore && direction === 'rtl') ||
-                  (addonAfter && direction === 'ltr'), // بدون radius راست
+                  (addonAfter && direction === 'ltr'),
               },
               containerClassName
             )}
@@ -76,7 +76,7 @@ export const Input = forwardRef<HTMLInputElement, TInputProps>(
             {prefix && <div className="input-prefix ml-3">{prefix}</div>}
 
             <Textbox
-              ref={ref} // انتقال ref به Textbox
+              ref={ref}
               className={cn(
                 'input-textbox px-3 py-2.5',
                 {

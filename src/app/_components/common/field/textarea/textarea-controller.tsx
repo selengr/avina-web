@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Control,
   Controller,
@@ -28,14 +27,14 @@ const TextareaController = <T extends FieldValues>({
     <Controller
       name={name}
       control={control}
-      rules={rules!}
+      rules={rules}
       render={({ field, fieldState: { error } }) => (
         <Textarea
           {...field}
           {...textareaProps}
           hasError={!!error}
           rows={rows}
-          errorText={error && error.message} // todo: check for simple helper text as well
+          errorText={error?.message}
         />
       )}
     />
