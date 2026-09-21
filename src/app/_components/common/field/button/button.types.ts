@@ -22,8 +22,6 @@ export type TButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
       | 'error';
   };
 
-// ---------------------------------------------------------
-
 interface TCustomClasses {
   btn?: string;
   icon?: string;

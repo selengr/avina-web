@@ -12,15 +12,27 @@ export const newsletterSchema = z.object({
 });
 
 export const consultingSchema = z.object({
-  education: z.string().trim().min(1),
-  name: z.string().trim().min(1),
-  lastName: z.string().trim().min(1),
-  phone: z
-    .string()
+  education: z
+    .string({ required_error: 'همه فیلدها ضروری هستند' })
     .trim()
-    .min(1)
+    .min(1, 'همه فیلدها ضروری هستند'),
+  name: z
+    .string({ required_error: 'همه فیلدها ضروری هستند' })
+    .trim()
+    .min(1, 'همه فیلدها ضروری هستند'),
+  lastName: z
+    .string({ required_error: 'همه فیلدها ضروری هستند' })
+    .trim()
+    .min(1, 'همه فیلدها ضروری هستند'),
+  phone: z
+    .string({ required_error: 'همه فیلدها ضروری هستند' })
+    .trim()
+    .min(1, 'همه فیلدها ضروری هستند')
     .regex(phonePattern, 'شماره همراه معتبر نیست'),
-  description: z.string().trim().min(1),
+  description: z
+    .string({ required_error: 'همه فیلدها ضروری هستند' })
+    .trim()
+    .min(1, 'همه فیلدها ضروری هستند'),
 });
 
 export type NewsletterInput = z.infer<typeof newsletterSchema>;

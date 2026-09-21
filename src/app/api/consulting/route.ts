@@ -4,7 +4,7 @@ import {
   saveConsultingRequest,
 } from '@/lib/submissions-store';
 import { canReadSubmissions } from '@/lib/submissions-auth';
-import { consultingSchema } from '@/lib/validation/forms';
+import { consultingSchema, firstZodMessage } from '@/lib/validation/forms';
 
 export async function GET(request: Request) {
   if (!canReadSubmissions(request)) {
@@ -24,16 +24,8 @@ export async function POST(request: Request) {
     const parsed = consultingSchema.safeParse(body);
 
     if (!parsed.success) {
-      const phoneIssue = parsed.error.issues.find((issue) =>
-        issue.path.includes('phone')
-      );
-      const message =
-        phoneIssue?.code === 'invalid_string'
-          ? 'شماره همراه معتبر نیست'
-          : 'همه فیلدها ضروری هستند';
-
       return NextResponse.json(
-        { success: false, message },
+        { success: false, message: firstZodMessage(parsed.error) },
         { status: 400 }
       );
     }

@@ -36,7 +36,7 @@ const InputController = <T extends FieldValues>({
           hasError={get(errors, name)}
           errorText={get(errors, name)?.message}
           value={field.value}
-          onChange={(value: any) => field.onChange(value)}
+          onChange={(value) => field.onChange(value)}
         />
       )}
     />
