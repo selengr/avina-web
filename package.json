@@ -12,7 +12,8 @@
     "prepare": "husky",
     "lint": "eslint ./src --ignore-pattern .eslintignore",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write ./src"
+    "format": "prettier --write ./src",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.67.1",

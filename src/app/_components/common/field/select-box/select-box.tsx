@@ -1,4 +1,3 @@
-// @typescript-eslint/no-unused-vars
 'use client';
 
 import Select, { GroupBase, StylesConfig } from 'react-select';
