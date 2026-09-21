@@ -1,0 +1,26 @@
+export const tailwindShadows = {
+  z1: '0 1px 2px 0px rgba(145, 158, 171, 0.16)',
+  z4: '0 4px 8px 0px rgba(145, 158, 171, 0.16)',
+  z8: '0 8px 16px 0px rgba(145, 158, 171, 0.16)',
+  z12: '0 12px 24px -4px rgba(145, 158, 171, 0.16)',
+  z16: '0 16px 32px -4px rgba(145, 158, 171, 0.16)',
+  z20: '0 20px 40px -4px rgba(145, 158, 171, 0.16)',
+  z24: '0 24px 48px 0px rgba(145, 158, 171, 0.16)',
+  card: '0 12px 24px -4px rgba(145, 158, 171, 0.12), 0px 0px 2px 0px rgba(145, 158, 171, 0.2)',
+  'drop-down':
+    '0 12px 24px -4px rgba(145, 158, 171, 0.12), 0px 0px 2px 0px rgba(145, 158, 171, 0.24)',
+  dialog: '-40px 40px 80px -8px rgba(0, 0, 0, 0.24)',
+  'input-focused': '0px 0px 0px 4px rgba(0, 55, 104, 0.15)',
+  'input-focused-error':
+    '0px 0px 0px 4px rgba(254, 228, 226, 1) ,0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+  primary: '0px 8px 16px 0px rgba(0, 167, 111, 0.24)',
+  secondary: ' 0px 8px 16px 0px rgba(142, 51, 255, 0.24)',
+  info: '0px 8px 16px 0px rgba(0, 184, 217, 0.24)',
+  success: '0px 8px 16px 0px rgba(34, 197, 94, 0.24)',
+  warning: '0px 8px 16px 0px rgba(255, 171, 0, 0.24)',
+  error: '0px 8px 16px 0px rgba(255, 86, 48, 0.24)',
+  none: 'none',
+  'landing-card': '0 16px 16px rgba(2, 110, 209, 0.24)',
+  normal: '0px 24px 48px 0px #919EAB29',
+  menu: '-20px 20px 40px -4px #919EAB3D,0px 0px 2px 0px #919EAB3D',
+};

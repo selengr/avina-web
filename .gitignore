@@ -1,0 +1,60 @@
+# Don't check auto-generated stuff into git
+coverage
+build
+node_modules
+stats.json
+.pnp
+.pnp.js
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# dependencies
+/node_modules
+/.pnp
+
+.idea/*
+/.idea/
+/.vscode/
+# testing
+/coverage
+
+# production
+/build
+/.next/
+/out/
+# misc
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+.env
+.env*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# local tooling
+.tools/
+
+# boilerplate internals
+generated-cra-app
+.cra-template-rb
+/template
+.eslintcache
+yarn.lock
+yarn-error.log
+/.gzipper/
+tsconfig.tsbuildinfo
+next-env.d.ts
+
+# form submissions saved by local API routes
+/data/
+
+# large local videos (keep offline if push times out)
+public/video/*.mp4

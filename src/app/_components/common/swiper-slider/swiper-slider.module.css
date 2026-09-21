@@ -1,0 +1,76 @@
+.swiperContainer {
+  padding-bottom: 36px;
+  overflow: visible;
+  width: 100%;
+}
+
+.swiperContainer :global(.swiper-wrapper) {
+  align-items: stretch;
+}
+
+.slide,
+.swiperContainer :global(.swiper-slide) {
+  height: auto;
+  box-sizing: border-box;
+}
+
+.swiperContainer :global(.swiper-pagination) {
+  bottom: 0 !important;
+}
+
+.swiperContainer :global(.swiper-pagination-bullet) {
+  width: 8px;
+  height: 8px;
+  background: #c4cdd5;
+  opacity: 1;
+  transition: width 0.25s ease, background-color 0.25s ease;
+}
+
+.swiperContainer :global(.swiper-pagination-bullet-active) {
+  background: #687bf2;
+  width: 18px;
+  border-radius: 9999px;
+}
+
+.navBtn {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #637381;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.08);
+  transition: color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.navBtn:hover {
+  color: #687bf2;
+  box-shadow: 0 2px 8px rgba(104, 123, 242, 0.2);
+}
+
+.navBtn:global(.swiper-button-disabled) {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.swiperScrollbar {
+  height: 4px !important;
+  background-color: rgba(104, 123, 242, 0.18) !important;
+  border-radius: 9999px !important;
+  width: min(220px, 60%) !important;
+}
+
+.swiperScrollbar :global(.swiper-scrollbar-drag) {
+  height: 100% !important;
+  background-color: #687bf2 !important;
+  border-radius: 9999px !important;
+  cursor: grab !important;
+}
+
+@media (max-width: 767px) {
+  .swiperContainer {
+    padding-inline: 4px;
+  }
+}
