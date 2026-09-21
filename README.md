@@ -1,15 +1,17 @@
 # avina-web
 
-Company website for **Avina** (آوینا) — IT solutions, services, portfolio, and contact.
+Company site for Avina (آوینا). Persian / RTL, built with Next.js.
 
-I use this as a real project in my portfolio. It's Persian / RTL and built with Next.js.
+I keep this in my portfolio as a real product-style site: home, about, services, portfolio, and contact.
 
-## What's in here
+## What it does
 
-- Home, about, services, portfolio, contact
-- Consulting request form
-- News section (falls back to sample cards if the API is offline)
-- Shared header / footer layout
+- Public pages for the company
+- Consulting request form (saved locally via API routes)
+- Newsletter signup
+- News block with sample cards when the backend is offline
+- Shared header and footer
+- Assets under `public/` (mp4 videos stay local — see `.gitignore`)
 
 ## Stack
 
@@ -19,14 +21,15 @@ I use this as a real project in my portfolio. It's Persian / RTL and built with 
 - Tailwind CSS
 - Framer Motion + Swiper
 
-## Run locally
+## Run it
 
 ```bash
 npm install
+cp .env.local.example .env.local
 npm run dev
 ```
 
-Then open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000).
 
 ## Build
 
@@ -35,30 +38,32 @@ npm run build
 npm start
 ```
 
-## جستجو
+## Env
 
-- صفحه `/search` برای جستجو بین صفحات، خدمات و نمونه کارها (`?q=` و `?kind=`)
-- فیلتر دسته‌بندی + جستجوی متنی در صفحه نمونه کارها
-- جزئیات هر پروژه در `/portfolio/[slug]` از کاتالوگ مشترک خوانده می‌شود
+Copy from `.env.local.example`:
 
-## Forms (local save)
+- `NEXT_PUBLIC_HOST_API_KEY` — backend base URL (optional)
+- `NEXT_PUBLIC_SITE_URL` — sitemap / robots
+- `SUBMISSIONS_READ_TOKEN` — only needed if you want to read saved form rows
 
-Newsletter and consulting forms post to:
+## Forms
 
-- `POST /api/newsletter` `{ "email": "..." }`
-- `POST /api/consulting` `{ "education", "name", "lastName", "phone", "description" }`
+Posts go to:
 
-Shared Zod schemas live in `src/lib/validation/forms.ts` (client + API).
-Saved under the local `data/` folder (gitignored).
+- `POST /api/newsletter` with `{ "email": "..." }`
+- `POST /api/consulting` with education, name, lastName, phone, description
 
-## SEO
+To list saved rows (needs the token):
 
-- `/sitemap.xml` and `/robots.txt` (set `NEXT_PUBLIC_SITE_URL` for production)
+- `GET /api/newsletter?token=...`
+- `GET /api/consulting?token=...`
 
-## Note
+Files land in `data/` (gitignored).
 
-Static files (fonts, images, videos) belong in `public/`. If that folder is empty, some images will look broken until you add them.
+## Notes
 
----
+- Portfolio has category pages and detail routes under `/portfolio`
+- Old sandbox routes `/ali` and `/up` redirect home
+- Form data is only for local/dev use right now
 
 Repo: [github.com/selengr/avina-web](https://github.com/selengr/avina-web)

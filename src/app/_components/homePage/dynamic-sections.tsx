@@ -42,10 +42,6 @@ export const AutoPlayVideo = dynamic(() => import('../common/video/video'), {
   ssr: false,
 });
 
-// export const NewsAndArticles = dynamic(() => import('./news-and-articles'), {
-//   ssr: false,
-// });
-
 export const SocialMedia = dynamic(
   () => import('../layouts/section/social-media'),
   {
