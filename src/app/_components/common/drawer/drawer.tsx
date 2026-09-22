@@ -46,6 +46,8 @@ const Drawer: React.FC<IDrawerProps> = ({ isOpen, onClose, children }) => {
       <div className="p-4">
         <DrawerHeader>
           <button
+            type="button"
+            aria-label="بستن منو"
             onClick={handleClose}
             className=" text-gray-600 hover:text-gray-800"
           >

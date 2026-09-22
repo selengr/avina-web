@@ -45,15 +45,22 @@ const MobileMenu = () => {
 
   return (
     <>
-      <IconMenu
-        className="lg:hidden mt-2 cursor-pointer"
-        fill="#637381"
-        stroke="fill"
-        width="34"
-        height="34"
-        viewBox="0 0 24 24"
+      <button
+        type="button"
+        aria-label="باز کردن منو"
+        aria-expanded={isDrawerOpen}
         onClick={toggleDrawer}
-      />
+        className="lg:hidden mt-2"
+      >
+        <IconMenu
+          className="cursor-pointer"
+          fill="#637381"
+          stroke="fill"
+          width="34"
+          height="34"
+          viewBox="0 0 24 24"
+        />
+      </button>
 
       <Drawer
         isOpen={isDrawerOpen}

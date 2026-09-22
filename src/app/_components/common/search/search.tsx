@@ -33,11 +33,16 @@ const Search = () => {
 
   return (
     <>
-      <button onClick={toggleSearchModal}>
+      <button
+        type="button"
+        aria-label="جستجو"
+        aria-expanded={isOpen}
+        onClick={toggleSearchModal}
+      >
         <Image
           width={34}
           height={34}
-          alt="search"
+          alt=""
           src="/images/search.svg"
           className="lg:mr-24 mt-2"
         />

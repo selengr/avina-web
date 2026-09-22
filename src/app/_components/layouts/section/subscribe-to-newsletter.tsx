@@ -121,7 +121,7 @@ const SubscribeToNewsletter = () => {
             </p>
           ) : null}
 
-          <div className="flex justify-end w-full pt-7 md:absolute md:1bottom-20">
+          <div className="flex justify-end w-full pt-7 md:absolute md:bottom-20">
             <StylizedButton
               className="py-7 px-[6px]  min-w-52"
               text={status === 'loading' ? 'در حال ارسال...' : 'عضویت'}
