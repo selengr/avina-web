@@ -18,6 +18,7 @@ import { IconEmail } from '../../icons/icons';
 import { VerticalImage } from '../../common/vertical-image/vertical-image';
 import StylizedButton from '../../common/field/button/stylized-button';
 import { emailPattern } from '@/lib/validation/forms';
+import { postFormJson } from '@/lib/form-submit';
 
 type NewsletterFormValues = {
   email: string;
@@ -35,27 +36,25 @@ const SubscribeToNewsletter = () => {
   const onSubmit = handleSubmit(async (values) => {
     setStatus('loading');
     setMessage('');
-    try {
-      const response = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: values.email }),
-      });
-      const result = await response.json();
-      if (!response.ok || !result?.success) {
-        throw new Error(result?.message || 'error');
+
+    const result = await postFormJson(
+      '/api/newsletter',
+      { email: values.email },
+      {
+        fallbackSuccessMessage: 'ایمیل ذخیره شد.',
+        fallbackErrorMessage: 'ثبت‌نام انجام نشد. لطفاً دوباره تلاش کنید.',
       }
+    );
+
+    if (result.ok) {
       setStatus('done');
-      setMessage(result.message || 'ایمیل ذخیره شد.');
+      setMessage(result.message);
       reset();
-    } catch (error) {
-      setStatus('error');
-      setMessage(
-        error instanceof Error && error.message !== 'error'
-          ? error.message
-          : 'ثبت‌نام انجام نشد. لطفاً دوباره تلاش کنید.'
-      );
+      return;
     }
+
+    setStatus('error');
+    setMessage(result.message);
   });
 
   return (

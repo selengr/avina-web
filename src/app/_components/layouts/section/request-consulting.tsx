@@ -21,6 +21,7 @@ import { VerticalImage } from '../../common/vertical-image/vertical-image';
 import SelectBoxController from '../../common/field/select-box/select-box-controller';
 import StylizedButton from '../../common/field/button/stylized-button';
 import { phonePattern } from '@/lib/validation/forms';
+import { postFormJson } from '@/lib/form-submit';
 
 type ConsultingFormValues = {
   education: string;
@@ -48,27 +49,21 @@ const RequestConsulting = () => {
   const onSubmit = handleSubmit(async (values) => {
     setStatus('loading');
     setMessage('');
-    try {
-      const response = await fetch('/api/consulting', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
-      });
-      const result = await response.json();
-      if (!response.ok || !result?.success) {
-        throw new Error(result?.message || 'error');
-      }
+
+    const result = await postFormJson('/api/consulting', values, {
+      fallbackSuccessMessage: 'درخواست شما ذخیره شد.',
+      fallbackErrorMessage: 'ارسال درخواست انجام نشد. لطفاً دوباره تلاش کنید.',
+    });
+
+    if (result.ok) {
       setStatus('done');
-      setMessage(result.message || 'درخواست شما ذخیره شد.');
+      setMessage(result.message);
       reset();
-    } catch (error) {
-      setStatus('error');
-      setMessage(
-        error instanceof Error && error.message !== 'error'
-          ? error.message
-          : 'ارسال درخواست انجام نشد. لطفاً دوباره تلاش کنید.'
-      );
+      return;
     }
+
+    setStatus('error');
+    setMessage(result.message);
   });
 
   return (
