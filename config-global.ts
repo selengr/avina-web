@@ -7,4 +7,7 @@ export const APP_DESCRIPTION =
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
+/** Default share image for Open Graph / Twitter (PNG preferred over SVG). */
+export const APP_OG_IMAGE = '/images/software.png';
+
 export const HOST_API_KEY = process.env.NEXT_PUBLIC_HOST_API_KEY || '';
