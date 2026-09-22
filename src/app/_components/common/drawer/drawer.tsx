@@ -8,6 +8,7 @@ import { IconClose } from '../../icons/icons';
 import Image from 'next/image';
 import DrawerHeader from './drawer-header/drawer-header';
 import Search from '../search/search';
+import { useBodyScrollLock } from '@/lib/use-body-scroll-lock';
 
 const Drawer: React.FC<IDrawerProps> = ({ isOpen, onClose, children }) => {
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -15,6 +16,8 @@ const Drawer: React.FC<IDrawerProps> = ({ isOpen, onClose, children }) => {
   const handleClose = useCallback(() => {
     onClose();
   }, [onClose]);
+
+  useBodyScrollLock(isOpen);
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
