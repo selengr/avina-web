@@ -14,6 +14,8 @@ import {
   APP_DEFAULT_TITLE,
   APP_DESCRIPTION,
   APP_TITLE_TEMPLATE,
+  APP_NAME,
+  APP_OG_IMAGE,
   SITE_URL,
 } from '../../config-global';
 
@@ -27,18 +29,40 @@ export const metadata: Metadata = {
     template: APP_TITLE_TEMPLATE,
   },
   description: APP_DESCRIPTION,
-  keywords: ['آوینا', 'Avina', 'IT', 'وب‌سایت', 'نرم‌افزار', 'شبکه'],
+  keywords: [
+    'آوینا',
+    'Avina',
+    'آوینا IT',
+    'راهکارهای فناوری اطلاعات',
+    'نرم‌افزار',
+    'سخت‌افزار',
+    'شبکه',
+    'امنیت اطلاعات',
+    'پشتیبانی IT',
+    'طراحی وب',
+  ],
+  applicationName: APP_NAME,
   openGraph: {
     title: APP_DEFAULT_TITLE,
     description: APP_DESCRIPTION,
     url: SITE_URL,
+    siteName: APP_NAME,
     locale: 'fa_IR',
     type: 'website',
+    images: [
+      {
+        url: APP_OG_IMAGE,
+        width: 898,
+        height: 645,
+        alt: APP_DEFAULT_TITLE,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: APP_DEFAULT_TITLE,
     description: APP_DESCRIPTION,
+    images: [APP_OG_IMAGE],
   },
   alternates: {
     canonical: SITE_URL,
