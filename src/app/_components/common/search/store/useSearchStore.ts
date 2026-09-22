@@ -37,9 +37,11 @@ export const useSearchStore = create<SearchState>()(
 interface SearchModalState {
   isOpen: boolean;
   toggleSearchModal: () => void;
+  closeSearchModal: () => void;
 }
 
 export const useSearchModalStore = create<SearchModalState>((set) => ({
   isOpen: false,
   toggleSearchModal: () => set((state) => ({ isOpen: !state.isOpen })),
+  closeSearchModal: () => set({ isOpen: false }),
 }));

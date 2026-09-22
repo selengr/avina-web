@@ -1,12 +1,25 @@
 'use client';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SearchData from './search-data/search-data';
 import { useSearchModalStore } from './store/useSearchStore';
 
 const Search = () => {
-  const { isOpen, toggleSearchModal } = useSearchModalStore();
+  const { isOpen, toggleSearchModal, closeSearchModal } = useSearchModalStore();
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closeSearchModal();
+      }
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [isOpen, closeSearchModal]);
 
   const variants = {
     open: {
