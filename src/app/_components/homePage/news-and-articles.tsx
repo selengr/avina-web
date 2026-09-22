@@ -12,7 +12,7 @@ const fallbackNews: TNewsAndArticlesData[] = [
     id: 1,
     title: 'خبر جدید در مورد صادرات و واردات محصولات',
     slug: 'news-1',
-    headline: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ...',
+    headline: 'مروری کوتاه بر صادرات و واردات و فرصت‌های پیش‌رو برای کسب‌وکارها.',
     published_at: '1403/07/25',
     views_count: 0,
     category: {
@@ -33,7 +33,7 @@ const fallbackNews: TNewsAndArticlesData[] = [
     id: 2,
     title: 'تحول دیجیتال در کسب‌وکارهای ایرانی',
     slug: 'news-2',
-    headline: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ...',
+    headline: 'چطور تحول دیجیتال می‌تواند کار روزمره شرکت‌های ایرانی را ساده‌تر کند.',
     published_at: '1403/07/24',
     views_count: 0,
     category: {
@@ -54,7 +54,7 @@ const fallbackNews: TNewsAndArticlesData[] = [
     id: 3,
     title: 'امنیت شبکه و زیرساخت‌های سازمانی',
     slug: 'news-3',
-    headline: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ...',
+    headline: 'نکات کاربردی برای امن‌تر نگه داشتن شبکه و زیرساخت سازمانی.',
     published_at: '1403/07/23',
     views_count: 0,
     category: {
