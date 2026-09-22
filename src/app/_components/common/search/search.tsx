@@ -4,9 +4,12 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SearchData from './search-data/search-data';
 import { useSearchModalStore } from './store/useSearchStore';
+import { useBodyScrollLock } from '@/lib/use-body-scroll-lock';
 
 const Search = () => {
   const { isOpen, toggleSearchModal, closeSearchModal } = useSearchModalStore();
+
+  useBodyScrollLock(isOpen);
 
   useEffect(() => {
     if (!isOpen) return;
