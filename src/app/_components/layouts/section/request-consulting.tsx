@@ -104,7 +104,7 @@ const RequestConsulting = () => {
             src={`/robot/bot-think.svg`}
             height={226}
             width={216}
-            alt="robot"
+            alt="ربات مشاوره آوینا"
             className="w-[186px] h-[176px] lg:w-[226px] lg:h-[216px] -mt-28 lg:-mt-40 absolute -left-2 lg:left-0 -top-[93px]"
           />
 
@@ -112,7 +112,7 @@ const RequestConsulting = () => {
             src={`/images/arrow-left-long.svg`}
             height={21}
             width={37}
-            alt="robot"
+            alt="فلش راهنما به سمت فرم مشاوره"
             className="w-[40px] absolute left-6 bottom-8"
           />
         </div>
