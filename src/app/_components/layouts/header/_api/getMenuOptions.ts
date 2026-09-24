@@ -17,7 +17,6 @@ export const getMenuOptions = async (): Promise<IMenuProps[]> => {
       return menus;
     }
   } catch {
-    // Keep browsing with static links when the API is down.
   }
 
   return fallbackNavMenus;
