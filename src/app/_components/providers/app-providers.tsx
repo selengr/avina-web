@@ -9,7 +9,6 @@ export default function AppProviders({
 }: {
   children: React.ReactNode;
 }) {
-  // Fresh client per browser session — avoids sharing cache across SSR requests.
   const [client] = useState(() => createQueryClient());
 
   return (
