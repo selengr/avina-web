@@ -73,3 +73,5 @@ If the public API is down, menus and news fall back to static content so the sit
 Icon React components under `src/app/_components/icons/` are already generated. The old `icons/gulpfile.js` pipeline is still in the repo if you ever need to regenerate them — install gulp locally for that; it’s not part of the app install anymore.
 
 Repo: https://github.com/selengr/avina-web
+
+Maintained by [@selengr](https://github.com/selengr).
