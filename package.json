@@ -23,6 +23,7 @@
     "framer-motion": "^12.4.7",
     "motion": "^12.4.4",
     "next": "15.1.6",
+    "pg": "^8.23.0",
     "prettier": "^3.5.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -37,6 +38,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-lottie": "^1.2.10",

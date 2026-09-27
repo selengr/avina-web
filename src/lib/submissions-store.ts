@@ -1,29 +1,4 @@
-import { promises as fs } from 'fs';
-import path from 'path';
-
-const DATA_DIR = path.join(process.cwd(), 'data');
-
-async function ensureDataDir() {
-  await fs.mkdir(DATA_DIR, { recursive: true });
-}
-
-async function readJsonArray<T>(fileName: string): Promise<T[]> {
-  await ensureDataDir();
-  const filePath = path.join(DATA_DIR, fileName);
-  try {
-    const raw = await fs.readFile(filePath, 'utf8');
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
-}
-
-async function writeJsonArray<T>(fileName: string, rows: T[]) {
-  await ensureDataDir();
-  const filePath = path.join(DATA_DIR, fileName);
-  await fs.writeFile(filePath, JSON.stringify(rows, null, 2), 'utf8');
-}
+import { ensureSchema, query } from '@/lib/db';
 
 export type NewsletterEntry = {
   id: string;
@@ -41,42 +16,93 @@ export type ConsultingEntry = {
   createdAt: string;
 };
 
-export async function saveNewsletterEmail(email: string): Promise<NewsletterEntry> {
-  const normalized = email.trim().toLowerCase();
-  const rows = await readJsonArray<NewsletterEntry>('newsletter.json');
-  const existing = rows.find((row) => row.email === normalized);
-  if (existing) {
-    return existing;
-  }
+type NewsletterRow = {
+  id: string;
+  email: string;
+  created_at: Date;
+};
 
-  const entry: NewsletterEntry = {
-    id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-    email: normalized,
-    createdAt: new Date().toISOString(),
+type ConsultingRow = {
+  id: string;
+  education: string;
+  name: string;
+  last_name: string;
+  phone: string;
+  description: string;
+  created_at: Date;
+};
+
+function toNewsletterEntry(row: NewsletterRow): NewsletterEntry {
+  return {
+    id: row.id,
+    email: row.email,
+    createdAt: row.created_at.toISOString(),
   };
-  rows.push(entry);
-  await writeJsonArray('newsletter.json', rows);
-  return entry;
+}
+
+function toConsultingEntry(row: ConsultingRow): ConsultingEntry {
+  return {
+    id: row.id,
+    education: row.education,
+    name: row.name,
+    lastName: row.last_name,
+    phone: row.phone,
+    description: row.description,
+    createdAt: row.created_at.toISOString(),
+  };
+}
+
+export async function saveNewsletterEmail(
+  email: string
+): Promise<NewsletterEntry> {
+  await ensureSchema();
+  const normalized = email.trim().toLowerCase();
+
+  // Upsert-as-no-op keeps this atomic: concurrent submissions for the same
+  // address can no longer race past each other the way the old
+  // read-then-write-the-whole-file approach did.
+  const result = await query<NewsletterRow>(
+    `INSERT INTO newsletter_subscribers (email)
+     VALUES ($1)
+     ON CONFLICT (email) DO UPDATE SET email = EXCLUDED.email
+     RETURNING id, email, created_at`,
+    [normalized]
+  );
+  return toNewsletterEntry(result.rows[0]);
 }
 
 export async function saveConsultingRequest(
   payload: Omit<ConsultingEntry, 'id' | 'createdAt'>
 ): Promise<ConsultingEntry> {
-  const rows = await readJsonArray<ConsultingEntry>('consulting.json');
-  const entry: ConsultingEntry = {
-    id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-    ...payload,
-    createdAt: new Date().toISOString(),
-  };
-  rows.push(entry);
-  await writeJsonArray('consulting.json', rows);
-  return entry;
+  await ensureSchema();
+  const result = await query<ConsultingRow>(
+    `INSERT INTO consulting_requests (education, name, last_name, phone, description)
+     VALUES ($1, $2, $3, $4, $5)
+     RETURNING id, education, name, last_name, phone, description, created_at`,
+    [
+      payload.education,
+      payload.name,
+      payload.lastName,
+      payload.phone,
+      payload.description,
+    ]
+  );
+  return toConsultingEntry(result.rows[0]);
 }
 
 export async function listNewsletterEmails(): Promise<NewsletterEntry[]> {
-  return readJsonArray<NewsletterEntry>('newsletter.json');
+  await ensureSchema();
+  const result = await query<NewsletterRow>(
+    `SELECT id, email, created_at FROM newsletter_subscribers ORDER BY created_at DESC`
+  );
+  return result.rows.map(toNewsletterEntry);
 }
 
 export async function listConsultingRequests(): Promise<ConsultingEntry[]> {
-  return readJsonArray<ConsultingEntry>('consulting.json');
+  await ensureSchema();
+  const result = await query<ConsultingRow>(
+    `SELECT id, education, name, last_name, phone, description, created_at
+     FROM consulting_requests ORDER BY created_at DESC`
+  );
+  return result.rows.map(toConsultingEntry);
 }
