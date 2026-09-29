@@ -10,7 +10,7 @@ export default function AppProviders({
   children: React.ReactNode;
 }) {
   const [client] = useState(() => createQueryClient());
-// test git
+
   return (
     <QueryClientProvider client={client}>{children}</QueryClientProvider>
   );
