@@ -75,7 +75,7 @@ export const SelectBox: React.FC<ISelectBoxProps & TErrorBehaviour> = ({
 
   const mergedComponents = {
     IndicatorSeparator: () => null, // کامپوننت پیش‌فرض
-    ...components, // کامپوننت‌های ارسال‌شده از بیرون
+    ...components, 
   };
 
   return (
